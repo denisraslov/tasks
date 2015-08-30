@@ -1,10 +1,13 @@
 # tasks
 
-Generate JS form JSX: 
+##Generate JS form JSX: 
+
 gulp browserify
 
-Generate CSS form LESS: 
+##Generate CSS form LESS: 
+
 gulp less
 
-Start webserver: 
+##Start webserver:
+
 node server.js
