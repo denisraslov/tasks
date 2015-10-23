@@ -1,6 +1,4 @@
 var React = require('react'),
-    mui = require('material-ui'),
-    TextField = mui.TextField,
     Note = require('./../note.jsx'),
     Reflux = require('reflux'),
     notesActions = require('./../../actions/notes'),
@@ -15,10 +13,6 @@ var PageNotes = React.createClass({
         return (
             <div className="page page_notes">
                 <div className="page__head">
-                    <TextField
-                        hintText="Новая заметка"
-                        floatingLabelText="Добавить новую заметку..."
-                        onKeyDown={this.onAddInputKeyDown} />
                 </div>
                 <div className="page__body">
                     {this.state.notes.map(function(note) {

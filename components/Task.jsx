@@ -1,13 +1,13 @@
 var React = require('react');
 
-var ListTasks = React.createClass({
+var Task = React.createClass({
     render: function() {
         return (
-            <div className="listTasks">
+            <div className="task">
                 <div>{this.props.model.name}</div>
             </div>
         );
     }
 });
 
-module.exports = ListTasks;
+module.exports = Task;

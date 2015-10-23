@@ -1,37 +1,23 @@
 var React = require('react'),
-    mui = require('material-ui'),
-    Dialog = mui.Dialog,
-    Calendar = require('react-calendar-component').Calendar;
+    Reflux = require('reflux'),
+    tasksActions = require('./../../actions/tasks'),
+    tasksStore = require('./../../stores/tasks'),
+    Calendar = require('./../../components/Calendar.jsx'),
+    ListTasks = require('./../../components/ListTasks.jsx');
 
-var PageCalendar = React.createClass({
+var PageTasks = React.createClass({
+    mixins: [Reflux.connect(tasksStore, 'tasks')],
+    getInitialState: function() {
+        return { tasks: tasksStore.items };
+    },
     render: function() {
         return (
-            <div>
-                <Calendar
-                    showDaysOfWeek={true}
-                    forceSixRows={false}
-                    onPickDate={this._onDateClick} />
-                <Dialog ref="dateDialog" title="Прогресс в занятиях" actions={this.getDateDialogActions()}>
-                    Слайдеры с прогрессом
-                </Dialog>
+            <div className="page page_tasks">
+                <Calendar items={this.state.tasks} />
+                <ListTasks items={this.state.tasks} />
             </div>
         );
-    },
-    getDateDialogActions: function() {
-        var page = this;
-
-        return [
-            { text: 'Отмена' },
-            { text: 'Сохранить', onClick: page._onDialogSubmit }
-        ];
-
-    },
-    _onDateClick: function(date) {
-        this.refs.dateDialog.show();
-    },
-    _onDialogSubmit: function() {
-        alert('submit');
     }
 });
 
-module.exports = PageCalendar;
+module.exports = PageTasks;

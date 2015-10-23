@@ -4973,7 +4973,7 @@ hr {
 .page__body {
   padding: 10px 30px;
 }
-/*------------ deal -----------------*/
+/*------------ note -----------------*/
 .note {
   display: inline-block;
   width: 300px;
@@ -4984,4 +4984,13 @@ hr {
   margin-right: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+/*-------------- tasks ---------------*/
+.calendar {
+  display: inline-block;
+  width: 70%;
+}
+.listTasks {
+  display: inline-block;
+  width: 30%;
 }

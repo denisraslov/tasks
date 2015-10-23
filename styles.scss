@@ -1,5 +1,18 @@
-@import "node_modules/material-ui/src/less/scaffolding.less";
-@import "node_modules/material-ui/src/less/components.less";
+/*----------- common -------------*/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/*----------- panel --------------*/
+
+.panel {
+  height: 40px;
+  background: #ddd;
+}
 
 /*------------------- calendar ------------------*/
 
@@ -67,7 +80,7 @@
   padding: 10px 30px;
 }
 
-/*------------ deal -----------------*/
+/*------------ note -----------------*/
 
 .note {
   display: inline-block;
@@ -79,4 +92,16 @@
   margin-right: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+/*-------------- tasks ---------------*/
+
+.calendar {
+    display: inline-block;
+    width: 70%;
+}
+
+.listTasks {
+  display: inline-block;
+  width: 30%;
 }

@@ -1,27 +1,9 @@
 var React = require('react'),
     Router = require('react-router'),
     RouteHandler = Router.RouteHandler,
-    mui = require('material-ui'),
-    RaisedButton = mui.RaisedButton,
-    LeftNav = mui.LeftNav,
-    MenuItem = mui.MenuItem,
-    Toolbar = mui.Toolbar,
-    DropDownMenu = mui.DropDownMenu,
-    ToolbarGroup = mui.ToolbarGroup,
-    injectTapEventPlugin = require('react-tap-event-plugin');
+    Panel = require('./components/Panel.jsx');
 
-injectTapEventPlugin();
-
-var menuItems = [
-    { route: 'tasks', text: 'Задачи' },
-    { route: 'notes', text: 'Заметки' }
-];
-
-var userMenItems = [
-    { payload: '1', text: 'Администратор' },
-    { payload: '2', text: 'Мой профиль' },
-    { payload: '3', text: 'Выйти' }
-];
+require('./styles.scss');
 
 var App = React.createClass({
 
@@ -36,21 +18,7 @@ var App = React.createClass({
     render: function() {
         return (
             <div>
-                <LeftNav ref="nav"
-                    docked={false}
-                    menuItems={menuItems}
-                    selectedIndex={this._getSelectedIndex()}
-                    onChange={this._onLeftNavChange} />
-
-                <Toolbar>
-                    <ToolbarGroup key={0} float="left">
-                        <RaisedButton label="Меню" primary={true} onClick={this.showMenu} />
-                    </ToolbarGroup>
-                    <ToolbarGroup key={1} float="right">
-                        <DropDownMenu menuItems={userMenItems} />
-                    </ToolbarGroup>
-                </Toolbar>
-
+                <Panel />
                 <RouteHandler/>
             </div>
         );
