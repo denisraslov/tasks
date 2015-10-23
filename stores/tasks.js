@@ -3,25 +3,26 @@ var Reflux = require('reflux'),
     store;
 
 store = Reflux.createStore({
+    lastId: 3,
     items: [
         {
             id: 1,
-            name: 'Музыка'
+            name: 'Do some work'
         },
         {
             id: 2,
-            name: 'Программирование'
+            name: 'Cook the dinner'
         },
         {
             id: 3,
-            name: 'Английский'
+            name: 'Read the book'
         }
     ],
     listenables: actions,
     onInsert: function(name) {
         var store = this;
 
-        store.items.push({ name: name });
+        store.items.push({ id: ++store.lastId, name: name });
 
         this.trigger(store.items);
     }

@@ -7,6 +7,10 @@ body {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /*----------- panel --------------*/
 
 .panel {
@@ -16,55 +20,6 @@ body {
 
 /*------------------- calendar ------------------*/
 
-.clndr-controls div {
-  background: #999;
-  display: inline-block;
-  width: 30%;
-  padding:5px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.clndr-controls .current-month {
-  width: 40%;
-  background: #333;
-  color: #fff;
-}
-
-.clndr {
-  margin: 0 auto;
-  background: red;
-}
-
-.clndr-grid {
-  text-align: center;
-  display: table;
-  width: 100%;
-}
-
-.clndr-grid .day-headers,
-.clndr-grid .days {
-  display: table-row;
-  width: 100%;
-}
-
-.clndr-grid .day-headers div,
-.clndr-grid .days div {
-  display: table-cell;
-  float: left;
-  height: 50px;
-  line-height: 50px;
-  background: #eee;
-  border: 1px solid #ddd;
-}
-
-.prev-month, .next-month {
-  color: #ccc;
-}
-
-.clearfix {
-  clear: both;
-}
 
 /*------------ content ---------------*/
 
@@ -101,7 +56,34 @@ body {
     width: 70%;
 }
 
-.listTasks {
+.page_tasks__tasksListWrap {
   display: inline-block;
   width: 30%;
+}
+
+.taskAdder {
+  padding: 20px;
+
+  input {
+    display: block;
+    padding: 8px;
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+.listTasks {
+  padding: 0 20px 20px;
+}
+
+.task {
+  padding: 10px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #ddd;
+  }
 }
