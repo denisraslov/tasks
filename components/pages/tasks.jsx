@@ -13,7 +13,7 @@ var PageTasks = React.createClass({
     },
     render: function() {
         return (
-            <div className="page page_tasks">
+            <div className="page__content page_tasks__content">
 
                 <Calendar items={this.state.tasks} />
 

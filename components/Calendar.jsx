@@ -3,43 +3,62 @@ var React = require('react'),
 
 var Calendar = React.createClass({
     getInitialState: function() {
-        return { startMoment: moment().startOf('month').startOf('week').startOf('day') }
+        return { month: 10, year: 2015, monthesCount: 5 }
     },
     render: function() {
         var rows = this.prepareRows();
 
-        console.log(rows);
-
         return (
-            <table className="calendar">
-                {
-                    rows.map(function(row) {
-                        return <tr>
-                            {
-                                row.map(function(cell) {
-                                    return <td>{cell.moment.date()}</td>;
-                                })
-                            }
-                        </tr>;
-                    })
-                }
-            </table>
+            <div className="calendar">
+                <table className="calendar__head">
+                    <tr>
+                        {
+                            rows[0].map(function(cell) {
+                                return <td>{cell.moment.format('dddd')}</td>;
+                            })
+                        }
+                    </tr>
+                </table>
+                <div className="calendar__body">
+                    <table>
+                        {
+                            rows.map(function(row) {
+                                return <tr>
+                                    {
+                                        row.map(function(cell) {
+                                            return <td>{cell.moment.date()}</td>;
+                                        })
+                                    }
+                                </tr>;
+                            })
+                        }
+                    </table>
+                </div>
+            </div>
         );
     },
     prepareRows: function() {
-        var currentMoment = this.state.startMoment.clone(),
+        var lastMoment = moment({ M: this.state.month, y: this.state.year }).startOf('week'),
+            indexMoment = lastMoment.clone(),
+            changedMonthesCount = 0,
             rows = [],
             cells = [];
 
-        while (currentMoment.month() != this.state.startMoment.month() + 2) {
-            cells.push({ moment: currentMoment.clone() });
+        while (changedMonthesCount < (this.state.monthesCount + 1) {
 
-            if (currentMoment.day() == 0) {
+            cells.push({ moment: indexMoment.clone() });
+
+            if (indexMoment.day() == 0) {
                 rows.push(cells);
                 cells = [];
             }
 
-            currentMoment.add(1, 'day');
+            indexMoment.add(1, 'day');
+
+            if (indexMoment.month() != lastMoment.month()) {
+                changedMonthesCount++;
+                lastMoment = indexMoment.clone();
+            }
         }
 
         return rows;

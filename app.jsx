@@ -1,9 +1,12 @@
 var React = require('react'),
     Router = require('react-router'),
     RouteHandler = Router.RouteHandler,
+    moment = require('moment'),
     Panel = require('./components/Panel.jsx');
 
-require('./styles.scss');
+    require('./styles.scss');
+
+    moment.locale('ru');
 
 var App = React.createClass({
 
@@ -17,7 +20,7 @@ var App = React.createClass({
 
     render: function() {
         return (
-            <div>
+            <div className="page">
                 <Panel />
                 <RouteHandler/>
             </div>

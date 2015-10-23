@@ -11,14 +11,17 @@ body {
   box-sizing: border-box;
 }
 
+
+.page {
+  white-space: nowrap;
+}
+
 /*----------- panel --------------*/
 
 .panel {
   height: 40px;
   background: #ddd;
 }
-
-/*------------------- calendar ------------------*/
 
 
 /*------------ content ---------------*/
@@ -52,12 +55,44 @@ body {
 /*-------------- tasks ---------------*/
 
 .calendar {
-    display: inline-block;
-    width: 70%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: 70%;
+  min-width: 800px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      width: 100%;
+
+      td {
+        vertical-align: top;
+        min-width: 110px;
+        width: auto;
+
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+    }
+  }
+
+  .calendar__body {
+    height: calc(100% - 50px);
+    overflow-y: scroll;
+
+    td {
+      height: 100px;
+    }
+  }
 }
 
 .page_tasks__tasksListWrap {
   display: inline-block;
+  vertical-align: top;
   width: 30%;
 }
 
