@@ -1,19 +1,15 @@
-# tasks
+# Task Manager
 
-Generate JS form JSX: 
+To start development run 2 commands:
 
-```js
-gulp browserify
-```
-
-Generate CSS form LESS:
-
-```js
-gulp less
-```
-
-Start webserver:
+1) Start the webserver
 
 ```js
 node server.js
+```
+
+2) Start webpack dev server with hot react reloading
+
+```js
+webpack-dev-server --hot --progress --colors
 ```
