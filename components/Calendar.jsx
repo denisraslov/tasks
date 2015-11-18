@@ -44,7 +44,7 @@ var Calendar = React.createClass({
             rows = [],
             cells = [];
 
-        while (changedMonthesCount < (this.state.monthesCount + 1) {
+        while (changedMonthesCount < (this.state.monthesCount + 1)) {
 
             cells.push({ moment: indexMoment.clone() });
 
