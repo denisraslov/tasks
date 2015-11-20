@@ -12,6 +12,7 @@ var router = {
             <Route handler={App} path="/">
                 <Route name="tasks" handler={PageTasks} />
                 <Route name="notes" handler={PageNotes} />
+                <Route handler={PageTasks} />
             </Route>
         );
     },
