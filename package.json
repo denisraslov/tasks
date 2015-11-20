@@ -17,10 +17,10 @@
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.9.5",
-    "webpack-dev-server": "^1.12.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.12.1",
     "babel-core": "^5.3.3",
     "babel-loader": "^5.0.0"
+  },
+  "dependencies": {
   }
 }
