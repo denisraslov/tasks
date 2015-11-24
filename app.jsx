@@ -9,11 +9,19 @@ var React = require('react'),
 var App = React.createClass({
     render: function() {
         return (
-            <div className="page">
+            <div id="page" className="page">
                 <Panel />
                 {this.props.children}
             </div>
         );
+    },
+    componentDidMount: function() {
+        this.setPageHeight();
+
+        window.addEventListener('resize', this.setPageHeight);
+    },
+    setPageHeight: function(e) {
+        document.getElementById('page').style.height = window.innerHeight + 'px';
     }
 });
 
