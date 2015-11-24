@@ -1,25 +1,30 @@
 var React = require('react'),
-    Router = require('react-router'),
-    Route = Router.Route,
-    DefaultRoute = Router.DefaultRoute,
+    ReactDOM = require('react-dom'),
+    RouterModule = require('react-router'),
+    Router = RouterModule.Router;
+    Route = RouterModule.Route,
+    History = require('history'),
     App = require('./app.jsx'),
-    PageTasks = require('./components/pages/tasks.jsx'),
-    PageNotes = require('./components/pages/notes.jsx');
+    PageTasks = require('./components/pages/tasks.jsx');
 
 var router = {
-    getRoutes: function() {
+    getRouter: function() {
         return (
-            <Route handler={App} path="/">
-                <Route name="tasks" handler={PageTasks} />
-                <Route name="notes" handler={PageNotes} />
-                <Route handler={PageTasks} />
-            </Route>
+            <Router history={this.createHistory()}>
+                <Route path="/" component={App}>
+                    <Route path="tasks" component={PageTasks}/>
+                    <Route path="*" component={PageTasks}/>
+                </Route>
+            </Router>
         );
     },
-    run: function() {
-        Router.run(this.getRoutes(), Router.HistoryLocation, function(Handler) {
-            React.render(<Handler/>, document.body);
+    createHistory: function() {
+        return History.createHistory({
+            basename: '/tasks'
         });
+    },
+    run: function() {
+        ReactDOM.render(this.getRouter(), document.getElementById('content'));
     }
 };
 
