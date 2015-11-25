@@ -15,6 +15,7 @@ module.exports = {
         publicPath: 'http://localhost:8080/',
         filename: 'public/bundle.js'
     },
+    devtool: "source-map",
     module: {
         loaders: [
             { test: /\.jsx$/, loaders: ['react-hot', 'jsx'] },
