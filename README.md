@@ -11,5 +11,5 @@ node server.js
 2) Start webpack dev server with hot react reloading
 
 ```js
-webpack-dev-server --hot --progress --colors
+npm run watch
 ```
