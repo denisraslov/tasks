@@ -38,15 +38,11 @@ body {
       height: 29px;
     }
 
-    .unvisible {
-      display: none;
-    }
 
-    .visible {
+    .menu__open {
       background-color: white;
       border: 1px solid gray;
       text-align: left;
-      display: block;
       z-index: 1;
     }
   }

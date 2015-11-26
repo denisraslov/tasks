@@ -2,22 +2,23 @@ var React = require('react');
 
 var RightMenu = React.createClass({
     getInitialState: function() {
-        return {className: 'unvisible'};
+        return {openMenu: false};
     },
     openMenu : function() {
-        this.state.className == 'visible' ? this.setState({className: 'unvisible'}) : this.setState({className: 'visible'});
-
+        this.state.openMenu ? this.setState({openMenu: false}) : this.setState({openMenu: true});
     },
     render: function() {
        return (
          <div className="menu__right" onClick={this.openMenu}>
              <div className = "title">Menu &#8595;</div>
-             <div className = {this.state.className}>
-                 <ul>
-                     <li>Profile</li>
-                     <li>Exit</li>
-                 </ul>
-             </div>
+             {(this.state.openMenu) &&
+                 <div className = "menu__open">
+                     <ul>
+                         <li>Profile</li>
+                         <li>Exit</li>
+                     </ul>
+                 </div>
+             }
 
          </div>
        );
