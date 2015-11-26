@@ -30,6 +30,15 @@ body {
     width: 100px;
     float: right;
     margin-top:11px;
+    cursor: pointer;
+  }
+
+  .unvisible {
+    display: none;
+  }
+
+  .visible {
+    display: block;
   }
 }
 
