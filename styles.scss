@@ -25,6 +25,12 @@ body {
 .panel {
   height: 40px;
   background: #ddd;
+
+  .menu__right {
+    width: 100px;
+    float: right;
+    margin-top:11px;
+  }
 }
 
 /*------------ content ---------------*/
