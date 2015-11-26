@@ -27,19 +27,30 @@ body {
   background: #ddd;
 
   .menu__right {
-    width: 100px;
+    text-align: center;
+    width: 260px;
     float: right;
+    position: relative;
     margin-top:11px;
     cursor: pointer;
+
+    .title{
+      height: 29px;
+    }
+
+    .unvisible {
+      display: none;
+    }
+
+    .visible {
+      background-color: white;
+      border: 1px solid gray;
+      text-align: left;
+      display: block;
+      z-index: 1;
+    }
   }
 
-  .unvisible {
-    display: none;
-  }
-
-  .visible {
-    display: block;
-  }
 }
 
 /*------------ content ---------------*/

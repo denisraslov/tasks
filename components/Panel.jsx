@@ -5,7 +5,7 @@ var Panel = React.createClass({
     render: function() {
         return (
             <div id="panel" className="panel">
-                <RightMenu className="unvisible"/>
+                <RightMenu />
             </div>
         );
     }

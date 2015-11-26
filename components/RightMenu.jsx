@@ -11,7 +11,7 @@ var RightMenu = React.createClass({
     render: function() {
        return (
          <div className="menu__right" onClick={this.openMenu}>
-             Menu &#8595;
+             <div className = "title">Menu &#8595;</div>
              <div className = {this.state.className}>
                  <ul>
                      <li>Profile</li>
