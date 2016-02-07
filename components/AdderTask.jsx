@@ -1,6 +1,4 @@
-var React = require('react'),
-    tasksActions = require('./../actions/tasks'),
-    tasksStore = require('./../stores/tasks');
+var React = require('react');
 
 var TaskAdder = React.createClass({
     getInitialState: function() {
@@ -22,7 +20,7 @@ var TaskAdder = React.createClass({
     },
     onKeyUp: function(e) {
         if (e.keyCode == 13) {
-            tasksActions.insert(e.target.value);
+            this.props.onAdd(e.target.value);
             this.setState({ value: '' });
         }
      }
