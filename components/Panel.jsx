@@ -1,11 +1,11 @@
 var React = require('react'),
-    RightMenu = require('./RightMenu.jsx');
+    Menu = require('./Menu.jsx');
 
 var Panel = React.createClass({
     render: function() {
         return (
             <div id="panel" className="panel">
-                <RightMenu />
+                <Menu />
             </div>
         );
     }
