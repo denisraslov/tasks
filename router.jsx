@@ -6,7 +6,7 @@ var React = require('react'),
     Route = RouterModule.Route,
     History = require('history'),
     App = require('./app.jsx'),
-    PageTasks = require('./components/pages/Tasks.jsx');
+    PageTasks = require('./components/pages/tasks.jsx');
 
 var router = {
     getRouter: function() {
