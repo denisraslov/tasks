@@ -22,22 +22,25 @@ var Calendar = React.createClass({
         return (
             <div className="calendar">
                 <table className="calendar__head">
+                    <tbody>
                     <tr>
                         {
                             rows[0].map(function(cell) {
-                                return <td>{cell.moment.format('dddd')}</td>;
+                                return <td key={cell.moment.format('D M YYYY')}>{cell.moment.format('dddd')}</td>;
                             })
                         }
                     </tr>
+                    </tbody>
                 </table>
                 <div className="calendar__body" onScroll={this.onScroll}>
                     <table>
+                        <tbody>
                         {
-                            rows.map(function(row) {
-                                return <tr>
+                            rows.map(function(row, i) {
+                                return <tr key={'line' + i}>
                                     {
                                         row.map(function(cell) {
-                                            return <td>
+                                            return <td key={cell.moment.format('D M YYYY')}>
                                                 {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
 
                                                 {
@@ -53,6 +56,7 @@ var Calendar = React.createClass({
                                 </tr>;
                             })
                         }
+                        </tbody>
                     </table>
                 </div>
             </div>
