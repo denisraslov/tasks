@@ -14,7 +14,7 @@ var reducer = function (state, action) {
                     {
                         id: 2,
                         name: 'Cook the dinner',
-                        completed: false
+                        completed: true
                     },
                     {
                         id: 3,

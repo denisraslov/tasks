@@ -1,12 +1,12 @@
 var React = require('react'),
     Task = require('./Task.jsx');
 
-var ListTasks = React.createClass({
+var ListTasksCompleted = React.createClass({
     render: function () {
         return (
-            <div className="listTasks">
+            <div className="listTasksCompleted listTasks">
                 {this.props.items.map(function (task) {
-                    if (!task.completed) {
+                    if (task.completed) {
                         return <Task key={task.id} model={task} showPopupTask={this.props.showPopupTask}/>;
                     }
                 }, this)}
@@ -15,4 +15,4 @@ var ListTasks = React.createClass({
     }
 });
 
-module.exports = ListTasks;
+module.exports = ListTasksCompleted;
