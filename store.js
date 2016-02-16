@@ -26,7 +26,7 @@ var reducer = function (state, action) {
             store.inited = true;
             break;
         case 'ADD_TASK':
-            state.tasks.push({name: action.data.name})
+            state.tasks.push({name: action.data.name, completed: false})
             break;
         case 'CHANGE_STATUS_TAKS':
             for (var i = 0; i < state.tasks; i++) {
