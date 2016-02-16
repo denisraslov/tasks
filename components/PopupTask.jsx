@@ -48,9 +48,10 @@ var PopupTask = React.createClass({
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     style={popupStyles}>
-
-                    <div>{this.state.model.name}</div>
                     <input type='checkbox' checked={this.state.model.completed} onChange={this.changeStatus}/>
+
+                    <div className='popupTask_name'>{this.state.model.name}</div>
+
                     <button onClick={this.closeModal}>Close</button>
                 </Modal>
             </div>
