@@ -3,7 +3,6 @@ var React = require('react'),
     Calendar = require('./../../components/Calendar.jsx'),
     AdderTask = require('./../../components/AdderTask.jsx'),
     ListTasks = require('./../../components/ListTasks.jsx'),
-    ListTasksCompleted = require('./../../components/ListTasksCompleted.jsx'),
     PopupTask = require('./../../components/PopupTask.jsx');
 
 var PageTasks = React.createClass({
@@ -33,10 +32,6 @@ var PageTasks = React.createClass({
                 <div className="page_tasks__tasksListWrap">
                     <AdderTask onAdd={this.addTask}/>
                     <ListTasks items={this.state.tasks} showPopupTask={this.showPopupTask}/>
-
-                    <div className="listTasks">Completed</div>
-
-                    <ListTasksCompleted items={this.state.tasks} showPopupTask={this.showPopupTask}/>
                 </div>
 
                 <PopupTask model={this.state.popupModel} changeStatusTask={this.changeStatusTask}/>
@@ -47,7 +42,7 @@ var PageTasks = React.createClass({
         store.dispatch({type: 'ADD_TASK', data: {name: name}})
     },
     changeStatusTask: function (status, id) {
-        store.dispatch({type: 'CHANGE_STATUS_TASK', data: {status: status, id: id}})
+        store.dispatch({type: 'CHANGE_STATUS_TASK', data: {status: status, id: id}});
     }
 });
 

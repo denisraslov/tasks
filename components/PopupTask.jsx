@@ -31,13 +31,8 @@ var PopupTask = React.createClass({
     changeStatus: function () {
         var model = this.state.model;
 
-        if (this.state.model.completed) {
-            this.props.changeStatusTask(false, model.id);
-            model.completed = false;
-        } else {
-            this.props.changeStatusTask(true, model.id);
-            model.completed = true;
-        }
+        model.completed = !model.completed;
+        this.props.changeStatusTask(model.completed, model.id);
 
         this.setState({model: model});
     },
