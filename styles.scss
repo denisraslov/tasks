@@ -165,9 +165,10 @@ body {
   }
 }
 
-/*------------ PopupTask -----------------*/
+/*---------- task adder ----------------*/
 
-.popupTask_name {
-  display: inline-block;
-  padding: 0 4px;
+.taskAdder__input {
+  width: 100% !important;
 }
+
+/*------------ PopupTask -----------------*/

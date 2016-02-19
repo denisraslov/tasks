@@ -8,8 +8,7 @@ var React = require('react'),
 var PageTasks = React.createClass({
     getInitialState: function () {
         return {
-            tasks: store.getState().tasks,
-            popupModel: {}
+            tasks: store.getState().tasks
         };
     },
     componentDidMount: function () {
@@ -19,22 +18,30 @@ var PageTasks = React.createClass({
             self.setState({tasks: store.getState().tasks});
         });
     },
-    showPopupTask: function (event) {
-        var id = event.target.id.substr(4);
-        this.setState({popupModel: this.state.tasks[id - 1]});
+    showPopup: function(task) {
+        this.setState({ popupModel: task });
+    },
+    onPopupClose: function() {
+        this.setState({ popupModel: null });
     },
     render: function () {
+
         return (
-            <div className="page__content page_tasks__content" onClick={this.showPopup}>
+            <div className="page__content page_tasks__content">
 
                 <Calendar items={this.state.tasks}/>
 
                 <div className="page_tasks__tasksListWrap">
                     <AdderTask onAdd={this.addTask}/>
-                    <ListTasks items={this.state.tasks} showPopupTask={this.showPopupTask}/>
+                    <ListTasks items={this.state.tasks} showPopup={this.showPopup}/>
                 </div>
 
-                <PopupTask model={this.state.popupModel} changeStatusTask={this.changeStatusTask}/>
+                <PopupTask
+                    model={this.state.popupModel}
+                    open={!!this.state.popupModel}
+                    onRequestClose={this.onPopupClose}
+                    changeStatusTask={this.changeStatusTask}
+                />
             </div>
         );
     },

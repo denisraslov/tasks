@@ -1,57 +1,35 @@
-var React = require('react');
-var Modal = require('react-modal');
+import React from 'react';
+import Dialog from 'material-ui/lib/dialog';
+import FlatButton from 'material-ui/lib/flat-button';
+import RaisedButton from 'material-ui/lib/raised-button';
 
-const popupStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
+export default class DialogExampleSimple extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        };
     }
-}
 
-var PopupTask = React.createClass({
-    getInitialState: function () {
-        return {
-            modalIsOpen: false,
-            model: {
-                name: '',
-                completed: false
-            }
-        }
-    },
-    componentWillReceiveProps: function (nextProp) {
-        this.setState({model: nextProp.model, modalIsOpen: true});
-    },
-    closeModal: function () {
-        this.setState({modalIsOpen: false})
-    },
-    changeStatus: function () {
-        var model = this.state.model;
+    render() {
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                secondary={true}
+                onTouchTap={this.props.onRequestClose}
+            />
+        ];
 
-        model.completed = !model.completed;
-        this.props.changeStatusTask(model.completed, model.id);
-
-        this.setState({model: model});
-    },
-    render: function () {
         return (
-            <div>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onRequestClose={this.closeModal}
-                    style={popupStyles}>
-                    <input type='checkbox' checked={this.state.model.completed} onChange={this.changeStatus}/>
-
-                    <div className='popupTask_name'>{this.state.model.name}</div>
-
-                    <button onClick={this.closeModal}>Close</button>
-                </Modal>
-            </div>
+            <Dialog
+                title={this.props.model ? this.props.model.name : ''}
+                actions={actions}
+                modal={false}
+                open={this.props.open}
+               onRequestClose={this.props.onRequestClose}
+            >
+                The actions in this window were passed in as an array of React objects.
+            </Dialog>
         );
     }
-});
-
-module.exports = PopupTask;
+}

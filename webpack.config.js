@@ -1,24 +1,27 @@
-function getEntrySources(sources) {
-    if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client?http://localhost:8080');
-        sources.push('webpack/hot/only-dev-server');
-    }
-
-    return sources;
-}
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-    entry: getEntrySources([
+    devtool: 'source-map',
+    entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
         './main.js'
-    ]),
+    ],
     output: {
         publicPath: 'http://localhost:8080/',
         filename: 'public/bundle.js'
     },
-    devtool: "source-map",
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     module: {
         loaders: [
-            { test: /\.jsx$/, loaders: ['react-hot', 'jsx'] },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                loaders: ["react-hot", 'jsx?harmony', "babel-loader"]
+            },
             { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
         ]
     }

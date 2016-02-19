@@ -21,13 +21,13 @@ var ListTasks = React.createClass({
             <div>
                 <div className="listTasks">
                     {tasks.completed.map(function (task) {
-                        return <Task key={task.id} model={task} showPopupTask={this.props.showPopupTask}/>
+                        return <Task key={task.id} model={task} showPopup={this.props.showPopup}/>
                     }, this)}
                 </div>
                 <div className='listTasks'>Completed</div>
                 <div className='listTasks'>
                     {tasks.notCompleted.map(function (task) {
-                        return <Task key={task.id} model={task} showPopupTask={this.props.showPopupTask}/>
+                        return <Task key={task.id} model={task} showPopup={this.props.showPopup}/>
                     }, this)}
                 </div>
             </div>

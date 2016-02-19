@@ -2,9 +2,13 @@ var React = require('react'),
     moment = require('moment'),
     Panel = require('./components/Panel.jsx');
 
-    require('./styles.scss');
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-    moment.locale('ru');
+injectTapEventPlugin();
+
+require('./styles.scss');
+
+moment.locale('ru');
 
 var App = React.createClass({
     render: function() {

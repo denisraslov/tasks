@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react';
+import TextField from 'material-ui/lib/text-field';
 
 var TaskAdder = React.createClass({
     getInitialState: function() {
@@ -7,11 +8,14 @@ var TaskAdder = React.createClass({
     render: function() {
         return (
             <div className="taskAdder">
-                <input type="text"
-                       placeholder="Type the task..."
-                       value={this.state.value}
-                       onChange={this.onChange}
-                       onKeyUp={this.onKeyUp} />
+                <TextField
+                    className="taskAdder__input"
+                    hintText="Type the task"
+                    floatingLabelText="New task"
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    onKeyUp={this.onKeyUp}
+                />
             </div>
         );
     },
