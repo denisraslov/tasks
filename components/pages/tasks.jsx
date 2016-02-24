@@ -5,6 +5,19 @@ var React = require('react'),
     ListTasks = require('./../../components/ListTasks.jsx'),
     PopupTask = require('./../../components/PopupTask.jsx');
 
+function filterTasks(tasks) {
+    var completedTasks = [],
+        activeTasks = [];
+
+    tasks.forEach(function (item) {
+        item.completed ?
+            completedTasks.push(item) :
+            activeTasks.push(item);
+    });
+
+    return {completedTasks: completedTasks, activeTasks: activeTasks};
+}
+
 var PageTasks = React.createClass({
     getInitialState: function () {
         return {
@@ -25,15 +38,21 @@ var PageTasks = React.createClass({
         this.setState({ popupModel: null });
     },
     render: function () {
+        var objTasks = filterTasks(this.state.tasks);
 
         return (
             <div className="page__content page_tasks__content">
 
-                <Calendar items={this.state.tasks}/>
+                <Calendar items={this.state.tasks} />
 
                 <div className="page_tasks__tasksListWrap">
                     <AdderTask onAdd={this.addTask}/>
-                    <ListTasks items={this.state.tasks} showPopup={this.showPopup}/>
+                    <ListTasks title = 'Active'
+                               items={objTasks.activeTasks}
+                               showPopup={this.showPopup}/>
+                    <ListTasks title = 'Completed'
+                               items = {objTasks.completedTasks}
+                               showPopup = {this.showPopup} />
                 </div>
 
                 <PopupTask
