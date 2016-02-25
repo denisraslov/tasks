@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
+import Checkbox from 'material-ui/lib/checkbox'
 
 export default class extends React.Component {
     constructor(props) {
@@ -41,9 +42,8 @@ export default class extends React.Component {
                 >
 
                 {this.state.model.name}
-                <input type='checkbox'
-                       checked={this.state.model.completed}
-                       onChange={this.changeStatusTask.bind(this)}
+                <Checkbox checked={this.state.model.completed}
+                          onCheck={this.changeStatusTask.bind(this)}
                     />
             </Dialog>
         );
