@@ -1,22 +1,24 @@
-var React = require('react'),
-    Task = require('./Task.jsx');
+import React from 'react';
+import Task from './Task.jsx';
 
-var ListTasks = React.createClass({
-    render: function () {
+export default class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
         return (
-            <div>
-                <div className="listTasks">
-                    <div>{this.props.title}</div>
-                    {this.props.items.map(function (task) {
+            <div className='listTasks'>
+                <div>{this.props.title}</div>
+                {
+                    this.props.items.map((task)=> {
                         return <Task key={task.id}
                                      model={task}
                                      showPopup={this.props.showPopup}
                             />
-                    }, this)}
-                </div>
+                    })
+                }
             </div>
         );
     }
-});
-
-module.exports = ListTasks;
+}
