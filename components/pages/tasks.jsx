@@ -56,13 +56,14 @@ var PageTasks = React.createClass({
                                showPopup={this.showPopup}
                         />
                 </div>
-
-                <PopupTask
-                    model={this.state.popupModel}
-                    open={!!this.state.popupModel}
-                    onRequestClose={this.onPopupClose}
-                    changeStatusTask={this.changeStatusTask}
-                    />
+                {this.state.popupModel != null ?
+                    <PopupTask
+                        model={this.state.popupModel}
+                        open={!!this.state.popupModel}
+                        onRequestClose={this.onPopupClose}
+                        changeStatusTask={this.changeStatusTask}
+                        /> : ''
+                }
             </div>
         );
     },

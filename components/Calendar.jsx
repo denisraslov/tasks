@@ -1,89 +1,48 @@
-var React = require('react'),
-    moment = require('moment');
+import React from 'react';
+import moment from 'moment';
 
-var Calendar = React.createClass({
-    getInitialState: function() {
-        return { month: 10, year: 2015, monthesCount: 5, showMonthNames: false }
-    },
-    onScroll: function(e) {
-        var self = this;
+export default class extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            month: 10,
+            year: 2015,
+            monthesCount: 5,
+            showMonthNames: false
+        }
+    }
 
-        this.setState({ showMonthNames: true });
+    onScroll(e) {
+        this.setState({showMonthNames: true});
 
         clearTimeout(this.showMonthNamesTimeout);
-        this.showMonthNamesTimeout = setTimeout(function() {
-            self.setState({ showMonthNames: false });
+        this.showMonthNamesTimeout = setTimeout(() => {
+            this.setState({showMonthNames: false});
         }, 600);
-    },
-    render: function() {
-        var self = this,
-            rows = this.getInitialMonthes();
+    }
 
-        return (
-            <div className="calendar">
-                <table className="calendar__head">
-                    <tbody>
-                    <tr>
-                        {
-                            rows[0].map(function(cell) {
-                                return <td key={cell.moment.format('D M YYYY')}>{cell.moment.format('dddd')}</td>;
-                            })
-                        }
-                    </tr>
-                    </tbody>
-                </table>
-                <div className="calendar__body" onScroll={this.onScroll}>
-                    <table>
-                        <tbody>
-                        {
-                            rows.map(function(row, i) {
-                                return <tr key={'line' + i}>
-                                    {
-                                        row.map(function(cell) {
-                                            return <td key={cell.moment.format('D M YYYY')}>
-                                                {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
+    getInitialMonthes() {
+        let rows = [];
 
-                                                {
-                                                    (cell.newMonth) &&
-                                                    <div className="calendar__monthName" style={{opacity: self.state.showMonthNames ? 1 : 0}}>
-                                                        {moment({ M: cell.newMonth.month, y: cell.newMonth.year }).format('MMMM YYYY')}
-                                                    </div>
-                                                }
-
-                                            </td>;
-                                        })
-                                    }
-                                </tr>;
-                            })
-                        }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        );
-    },
-    getInitialMonthes: function() {
-        var rows = [];
-
-        for (var i = 0, indexMoment = moment({ M: this.state.month, y: this.state.year });
-                i < this.state.monthesCount;
-                i++, indexMoment.add(1, 'month')) {
-
+        for (let i = 0, indexMoment = moment({M: this.state.month, y: this.state.year});
+             i < this.state.monthesCount;
+             i++, indexMoment.add(1, 'month')) {
             rows = rows.concat(this.getMonth(indexMoment.month(), indexMoment.year()));
         }
 
         return rows;
-    },
-    getMonth: function(month, year) {
-        var startMoment = moment({ M: month, y: year }).startOf('week'),
-            nextMonth = moment({ M: month, y: year }).add(1, 'month').month(),
+    }
+
+    getMonth(month, year) {
+        let startMoment = moment({M: month, y: year}).startOf('week'),
+            nextMonth = moment({M: month, y: year}).add(1, 'month').month(),
             indexMoment = startMoment.clone(),
             rows = [],
             cells = [];
 
         while (indexMoment.month() != nextMonth) {
 
-            cells.push({ moment: indexMoment.clone() });
+            cells.push({moment: indexMoment.clone()});
 
             if (indexMoment.day() == 0) {
                 rows.push(cells);
@@ -97,10 +56,58 @@ var Calendar = React.createClass({
             rows.pop();
         }
 
-        rows[0][0].newMonth = { month: month, year: year };
+        rows[0][0].newMonth = {month: month, year: year};
 
         return rows;
     }
-});
 
-module.exports = Calendar;
+    render() {
+        const rows = this.getInitialMonthes();
+
+        return (
+            <div className='calendar'>
+                <table className='calendar__head'>
+                    <tbody>
+                    <tr>
+                        {
+                            rows[0].map((cell) => {
+                                return <td key={cell.moment.format('D M YYYY')}>{cell.moment.format('dddd')}</td>;
+                            })
+                        }
+                    </tr>
+                    </tbody>
+                </table>
+                <div className='calendar__body' onScroll={this.onScroll.bind(this)}>
+                    <table>
+                        <tbody>
+                        {
+                            rows.map((row, i) => {
+                                return <tr key={'line'+i}>
+                                    {
+                                        row.map((cell) => {
+                                            return <td key={cell.moment.format('D M YYYY')}>
+                                                {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
+
+                                                {
+                                                    (cell.newMonth) &&
+                                                    <div className='calendar__monthName'
+                                                         style={{opacity: this.state.showMonthNames ? 1 : 0}}>
+                                                        {moment({
+                                                            M: cell.newMonth.month,
+                                                            y: cell.newMonth.year
+                                                        }).format('MMMM YYYY')}
+                                                    </div>
+                                                }
+                                            </td>;
+                                        })
+                                    }
+                                </tr>;
+                            })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+}
