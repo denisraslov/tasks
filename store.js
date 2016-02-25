@@ -1,16 +1,16 @@
 var Redux = require('redux'),
     store;
 
-function changeStatusTask(tasks, data) {
-    for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].id === data.id) {
-            tasks[i].comleted = data.status;
-            return tasks;
+var reducer = function (state, action) {
+
+    function getTaskById(id) {
+        for (var i = 0; i < state.tasks.length; i++) {
+            if (state.tasks[i].id === id) {
+                return state.tasks[i];
+            }
         }
     }
-}
 
-var reducer = function (state, action) {
     switch (action.type) {
         case 'INIT':
             state = {
@@ -38,7 +38,8 @@ var reducer = function (state, action) {
             state.tasks.push({name: action.data.name, completed: false})
             break;
         case 'CHANGE_STATUS_TASK':
-            state.tasks = changeStatusTask(state.tasks, action.data);
+            var task = getTaskById(action.data.id);
+            task.completed = action.data.status;
             break;
     }
 
