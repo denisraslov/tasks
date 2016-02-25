@@ -16,12 +16,8 @@ export default class extends React.Component {
         this.setState({model: newProps.model});
     }
 
-    changeStatusTask() {
-        const model = this.state.model;
-
-        model.completed = !model.completed;
-        this.props.changeStatusTask(model.completed, model.id);
-        this.setState({model: this.state.model});
+    changeTaskStatus() {
+        this.props.changeTaskStatus(this.state.model.id);
     }
 
     render() {
@@ -41,9 +37,9 @@ export default class extends React.Component {
                 onRequestClose={this.props.onRequestClose}
                 >
 
-                {this.state.model.name}
-                <Checkbox checked={this.state.model.completed}
-                          onCheck={this.changeStatusTask.bind(this)}
+                <Checkbox   label="Completed"
+                            checked={this.state.model.completed}
+                            onCheck={this.changeTaskStatus.bind(this)}
                     />
             </Dialog>
         );

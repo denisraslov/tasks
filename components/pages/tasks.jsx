@@ -50,10 +50,12 @@ var PageTasks = React.createClass({
                     <ListTasks title='Active'
                                items={objTasks.activeTasks}
                                showPopup={this.showPopup}
+                                changeTaskStatus={this.changeTaskStatus}
                         />
                     <ListTasks title='Completed'
                                items={objTasks.completedTasks}
                                showPopup={this.showPopup}
+                                changeTaskStatus={this.changeTaskStatus}
                         />
                 </div>
                 {this.state.popupModel != null ?
@@ -61,17 +63,17 @@ var PageTasks = React.createClass({
                         model={this.state.popupModel}
                         open={!!this.state.popupModel}
                         onRequestClose={this.onPopupClose}
-                        changeStatusTask={this.changeStatusTask}
+                        changeTaskStatus={this.changeTaskStatus}
                         /> : ''
                 }
             </div>
         );
     },
-    addTask: function (name) {
+    addTask: function(name) {
         store.dispatch({type: 'ADD_TASK', data: {name: name}})
     },
-    changeStatusTask: function (status, id) {
-        store.dispatch({type: 'CHANGE_STATUS_TASK', data: {status: status, id: id}});
+    changeTaskStatus: function(id) {
+        store.dispatch({type: 'CHANGE_TASK_STATUS', data: {id: id}});
     }
 });
 

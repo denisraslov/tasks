@@ -158,10 +158,20 @@ body {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
+  vertical-align: middle;
 
   &:hover {
     background: #ddd;
   }
+
+  & > * {
+    vertical-align: middle;
+  }
+}
+
+.task__checkbox {
+  display: inline-block !important;
+  width: 36px !important;
 }
 
 /*---------- task adder ----------------*/

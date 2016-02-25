@@ -15,6 +15,7 @@ export default class extends React.Component {
                         return <Task key={task.id}
                                      model={task}
                                      showPopup={this.props.showPopup}
+                                    changeTaskStatus={this.props.changeTaskStatus}
                             />
                     })
                 }

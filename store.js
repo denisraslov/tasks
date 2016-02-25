@@ -37,9 +37,9 @@ var reducer = function (state, action) {
         case 'ADD_TASK':
             state.tasks.push({name: action.data.name, completed: false})
             break;
-        case 'CHANGE_STATUS_TASK':
+        case 'CHANGE_TASK_STATUS':
             var task = getTaskById(action.data.id);
-            task.completed = action.data.status;
+            task.completed = !task.completed;
             break;
     }
 

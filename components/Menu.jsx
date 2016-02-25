@@ -11,12 +11,10 @@ export default class extends React.Component{
     render(){
         return(
             <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-            className='menu'
-            anchorOrigin= {{
-                vertical: 'bottom',
-                horizontal: 'right'
-            }}
+                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                className='menu'
+                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}
             >
                 <MenuItem primaryText='Profile' />
                 <MenuItem primaryText='Exit' />
