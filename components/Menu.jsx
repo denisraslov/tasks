@@ -1,39 +1,26 @@
-var React = require('react');
+import React from 'react';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 
-var RightMenu = React.createClass({
-    label: 'Menu',
-    getInitialState: function() {
-        return {isOpen: false};
-    },
-    componentDidMount: function() {
-    },
-    toggle: function(e) {
-        this.state.isOpen
-            ? this.close()
-            : this.open();
-    },
-    open: function() {
-        this.setState({isOpen: true});
-    },
-    close: function() {
-        this.setState({isOpen: false});
-    },
-    render: function() {
-       return (
-         <div className="menu" onClick={this.toggle}>
-             <div className="menu__header">{this.label}</div>
-             {(this.state.isOpen) &&
-                 <div className = "menu__body">
-                     <ul>
-                         <li>Profile</li>
-                         <li>Exit</li>
-                     </ul>
-                 </div>
-             }
-
-         </div>
-       );
+export default class extends React.Component{
+    constructor(props){
+        super(props);
     }
-});
-
-module.exports = RightMenu;
+    render(){
+        return(
+            <IconMenu
+            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            className='menu'
+            anchorOrigin= {{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}
+            >
+                <MenuItem primaryText='Profile' />
+                <MenuItem primaryText='Exit' />
+                </IconMenu>
+        );
+    }
+}
