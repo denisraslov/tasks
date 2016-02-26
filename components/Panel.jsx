@@ -1,14 +1,16 @@
-var React = require('react'),
-    Menu = require('./Menu.jsx');
+import React from 'react';
+import Menu from './Menu.jsx';
 
-var Panel = React.createClass({
-    render: function() {
+export default class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
         return (
-            <div id="panel" className="panel">
+            <div id='panel' className='panel'>
                 <Menu />
             </div>
         );
     }
-});
-
-module.exports = Panel;
+}

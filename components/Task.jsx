@@ -23,7 +23,7 @@ export default class extends React.Component {
                     checked={model.completed}
                     onCheck={this.changeTaskStatus.bind(this)}
                     onClick={(e)=> {e.stopPropagation()}}
-                />
+                    />
                 {this.props.model.name}
             </div>
         );

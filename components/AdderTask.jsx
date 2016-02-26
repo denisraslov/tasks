@@ -10,7 +10,7 @@ export default class extends React.Component {
     }
 
     onChange(e) {
-        this.setState({value: e.taget.value});
+        this.setState({value: e.target.value});
     }
 
     onKeyUp(e) {

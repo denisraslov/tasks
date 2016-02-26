@@ -37,9 +37,9 @@ export default class extends React.Component {
                 onRequestClose={this.props.onRequestClose}
                 >
 
-                <Checkbox   label="Completed"
-                            checked={this.state.model.completed}
-                            onCheck={this.changeTaskStatus.bind(this)}
+                <Checkbox label="Completed"
+                          checked={this.state.model.completed}
+                          onCheck={this.changeTaskStatus.bind(this)}
                     />
             </Dialog>
         );
