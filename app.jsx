@@ -1,32 +1,34 @@
-var React = require('react'),
-    moment = require('moment'),
-    Panel = require('./components/Panel.jsx');
-
+import React from 'react';
+import moment from 'moment';
+import Panel from './components/Panel.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import './styles.scss';
 
 injectTapEventPlugin();
 
-require('./styles.scss');
-
 moment.locale('ru');
 
-var App = React.createClass({
-    render: function() {
+export default class extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.setPageHeight();
+
+        window.addEventListener('resize', this.setPageHeight.bind(this));
+    }
+
+    setPageHeight(e) {
+        document.getElementById('page').style.height = window.innerHeight + 'px';
+    }
+
+    render() {
         return (
-            <div id="page" className="page">
+            <div id='page' className='page'>
                 <Panel />
                 {this.props.children}
             </div>
         );
-    },
-    componentDidMount: function() {
-        this.setPageHeight();
-
-        window.addEventListener('resize', this.setPageHeight);
-    },
-    setPageHeight: function(e) {
-        document.getElementById('page').style.height = window.innerHeight + 'px';
     }
-});
-
-module.exports = App;
+}
