@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import TaskCalendar from './../components/TaskCalendar.jsx';
 
 export default class extends React.Component {
     constructor(props) {
@@ -86,7 +87,11 @@ export default class extends React.Component {
                                     {
                                         row.map((cell) => {
                                             return <td key={cell.moment.format('D M YYYY')}>
-                                                {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
+                                                <div className="calendar__date">
+                                                    {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
+                                                </div>
+
+                                                {this.renderTasks(cell.moment.startOf('day').format('X'))}
 
                                                 {
                                                     (cell.newMonth) &&
@@ -109,5 +114,16 @@ export default class extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    renderTasks(date) {
+        return this.props.tasks
+            .filter((task) => (task.date == date))
+            .map((task) => {
+                return <TaskCalendar
+                    model={task}
+                    showPopup={this.props.showPopup}
+                />
+            })
     }
 }

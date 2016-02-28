@@ -1,21 +1,23 @@
 import React from 'react';
-import store from './../../store';
+import store from './../../store.jsx';
 import Calendar from './../../components/Calendar.jsx';
 import AdderTask from './../../components/AdderTask.jsx';
 import ListTasks from './../../components/ListTasks.jsx';
 import PopupTask from './../../components/PopupTask.jsx';
 
-function filterTasks(tasks) {
+function getNotDatedTasks(tasks) {
     let completedTasks = [],
         activeTasks = [];
 
-    tasks.forEach((item) => {
-       item.completed ?
-           completedTasks.push(item):
-           activeTasks.push(item);
-    });
+    tasks
+        .filter((item) => !item.date)
+        .forEach((item) => {
+           item.completed ?
+               completedTasks.push(item):
+               activeTasks.push(item);
+        });
 
-    return {completedTasks: completedTasks, activeTasks: activeTasks};
+    return {completed: completedTasks, active: activeTasks};
 }
 
 export default class extends React.Component {
@@ -43,22 +45,27 @@ export default class extends React.Component {
         store.dispatch({type: 'CHANGE_TASK_STATUS', data: {id: id}});
     }
     render(){
-        const objTasks = filterTasks(this.state.tasks);
+        const notDatedTasks = getNotDatedTasks(this.state.tasks);
 
         return (
             <div className='page__content page_tasks__content'>
 
-                <Calendar items={this.state.tasks} />
+                <Calendar
+                    tasks={this.state.tasks}
+                    showPopup={this.showPopup.bind(this)}
+                />
 
                 <div className='page_tasks__tasksListWrap'>
                     <AdderTask onAdd={this.addTask} />
-                    <ListTasks title='Active'
-                               items={objTasks.activeTasks}
+                    <ListTasks title="Let's do it!"
+                                placeholder="Nothing to do! Have a nice day!"
+                               items={notDatedTasks.active}
                                showPopup={this.showPopup.bind(this)}
                                changeTaskStatus={this.changeTaskStatus.bind(this)}
                                />
-                    <ListTasks title='Completed'
-                               items={objTasks.completedTasks}
+                    <ListTasks title="Good job"
+                                placeholder="Nothing was done yet..."
+                               items={notDatedTasks.completed}
                                showPopup={this.showPopup.bind(this)}
                                changeTaskStatus={this.changeTaskStatus.bind(this)}
                                />
@@ -75,4 +82,3 @@ export default class extends React.Component {
         );
     }
 }
-

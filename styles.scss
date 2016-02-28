@@ -1,3 +1,33 @@
+/// Mixin to customize scrollbars
+/// Beware, this does not work in all browsers
+/// @author Hugo Giraudel
+/// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+/// @param {Color} $foreground-color - Scrollbar's color
+/// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+/// @example scss - Scrollbar styling
+///   @include scrollbars(.5em, slategray);
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  ::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: $background-color;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
 /*----------- common -------------*/
 
 html,
@@ -5,6 +35,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+  @include scrollbars(.5em, slategray);
 }
 
 * {
@@ -23,8 +55,8 @@ body {
 /*----------- panel --------------*/
 
 .panel {
-  height: 40px;
-  background: #ddd;
+  height: 49px;
+  background: #90A4AE;
 
   .menu {
     float: right;
@@ -102,7 +134,7 @@ body {
         width: auto;
 
         padding: 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #e0e0e0;
 
         position: relative;
       }
@@ -127,8 +159,25 @@ body {
 
     td {
       height: 100px;
+      position: relative;
     }
   }
+}
+
+.calendar__head {
+    color: #B0BEC5;
+    font-size: 13px;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+
+    td {
+        border: none !important;
+    }
+}
+
+.calendar__date {
+    font-size: 13px;
+    padding-bottom: 6px;
 }
 
 .page_tasks__tasksListWrap {
@@ -138,7 +187,7 @@ body {
 }
 
 .taskAdder {
-  padding: 20px;
+  padding: 0 20px 20px;
 
   input {
     display: block;
@@ -150,6 +199,17 @@ body {
 
 .listTasks {
   padding: 0 20px 20px;
+}
+
+.listTasks__title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.listTasks__placeholder {
+    color: #CFD8DC;
+    margin: 13px;
 }
 
 .task {
@@ -172,6 +232,18 @@ body {
 .task__checkbox {
   display: inline-block !important;
   width: 36px !important;
+}
+
+/*--------- task calendar --------------*/
+
+.taskCalendar {
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 8px;
+    color: #fff;
+    background-color: #757575;
+    border-radius: 3px;
+    margin-bottom: 2px;
 }
 
 /*---------- task adder ----------------*/

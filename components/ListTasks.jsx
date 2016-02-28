@@ -7,19 +7,29 @@ export default class extends React.Component {
     }
 
     render() {
+        var items = this.props.items;
+
         return (
-            <div className='listTasks'>
-                <div>{this.props.title}</div>
-                {
-                    this.props.items.map((task)=> {
-                        return <Task key={task.id}
-                                     model={task}
-                                     showPopup={this.props.showPopup}
-                                    changeTaskStatus={this.props.changeTaskStatus}
-                            />
-                    })
-                }
+            <div className="listTasks">
+                <div className="listTasks__title">{this.props.title}</div>
+                {this.renderItems()}
             </div>
         );
+    }
+
+    renderItems() {
+        var items = this.props.items;
+
+        if (items.length) {
+            return items.map((task)=> {
+                return <Task key={task.id}
+                             model={task}
+                             showPopup={this.props.showPopup}
+                            changeTaskStatus={this.props.changeTaskStatus}
+                    />
+            });
+        } else {
+            return <div className="listTasks__placeholder">{this.props.placeholder}</div>
+        }
     }
 }
