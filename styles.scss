@@ -9,16 +9,16 @@
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
   // For Google Chrome
   ::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
+    width: $size;
+    height: $size;
   }
 
   ::-webkit-scrollbar-thumb {
-      background: $foreground-color;
+    background: $foreground-color;
   }
 
   ::-webkit-scrollbar-track {
-      background: $background-color;
+    background: $background-color;
   }
 
   // For Internet Explorer
@@ -165,19 +165,19 @@ body {
 }
 
 .calendar__head {
-    color: #B0BEC5;
-    font-size: 13px;
-    border-right: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+  color: #B0BEC5;
+  font-size: 13px;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 
-    td {
-        border: none !important;
-    }
+  td {
+    border: none !important;
+  }
 }
 
 .calendar__date {
-    font-size: 13px;
-    padding-bottom: 6px;
+  font-size: 13px;
+  padding-bottom: 6px;
 }
 
 .page_tasks__tasksListWrap {
@@ -202,14 +202,14 @@ body {
 }
 
 .listTasks__title {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
 .listTasks__placeholder {
-    color: #CFD8DC;
-    margin: 13px;
+  color: #CFD8DC;
+  margin: 13px;
 }
 
 .task {
@@ -237,13 +237,13 @@ body {
 /*--------- task calendar --------------*/
 
 .taskCalendar {
-    cursor: pointer;
-    font-size: 12px;
-    padding: 4px 8px;
-    color: #fff;
-    background-color: #757575;
-    border-radius: 3px;
-    margin-bottom: 2px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  color: #fff;
+  background-color: #757575;
+  border-radius: 3px;
+  margin-bottom: 2px;
 }
 
 /*---------- task adder ----------------*/
@@ -253,3 +253,16 @@ body {
 }
 
 /*------------ PopupTask -----------------*/
+.taskPopup__name {
+  margin-left: 25px;
+}
+
+.taskPopup__checkbox {
+  float: right;
+  top: 37px;
+  width: auto !important;
+}
+
+.taskPopup__description {
+  font-size: 20px !important;
+}

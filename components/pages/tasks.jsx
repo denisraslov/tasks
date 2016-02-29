@@ -12,39 +12,53 @@ function getNotDatedTasks(tasks) {
     tasks
         .filter((item) => !item.date)
         .forEach((item) => {
-           item.completed ?
-               completedTasks.push(item):
-               activeTasks.push(item);
+            item.completed ?
+                completedTasks.push(item) :
+                activeTasks.push(item);
         });
 
     return {completed: completedTasks, active: activeTasks};
 }
 
 export default class extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             tasks: store.getState().tasks
         };
     }
-    componentDidMount(){
+
+    componentDidMount() {
         store.subscribe(() => {
             this.setState({tasks: store.getState().tasks});
         })
     }
-    showPopup(task){
+
+    showPopup(task) {
         this.setState({popupModel: task});
     }
-    onPopupClose(){
+
+    onPopupClose() {
         this.setState({popupModel: null});
     }
-    addTask(name){
+
+    addTask(name) {
         store.dispatch({type: 'ADD_TASK', data: {name: name}});
     }
-    changeTaskStatus(id){
+
+    changeTaskStatus(id) {
         store.dispatch({type: 'CHANGE_TASK_STATUS', data: {id: id}});
     }
-    render(){
+
+    changeTaskName(name, id) {
+        store.dispatch({type: 'CHANGE_NAME', data: {name: name, id: id}});
+    }
+
+    changeTaskDescription(description, id) {
+        store.dispatch({type: 'CHANGE_DESCRIPTION', data: {description: description, id: id}})
+    }
+
+    render() {
         const notDatedTasks = getNotDatedTasks(this.state.tasks);
 
         return (
@@ -53,31 +67,33 @@ export default class extends React.Component {
                 <Calendar
                     tasks={this.state.tasks}
                     showPopup={this.showPopup.bind(this)}
-                />
+                    />
 
                 <div className='page_tasks__tasksListWrap'>
-                    <AdderTask onAdd={this.addTask} />
+                    <AdderTask onAdd={this.addTask}/>
                     <ListTasks title="Let's do it!"
-                                placeholder="Nothing to do! Have a nice day!"
+                               placeholder="Nothing to do! Have a nice day!"
                                items={notDatedTasks.active}
                                showPopup={this.showPopup.bind(this)}
                                changeTaskStatus={this.changeTaskStatus.bind(this)}
-                               />
+                        />
                     <ListTasks title="Good job"
-                                placeholder="Nothing was done yet..."
+                               placeholder="Nothing was done yet..."
                                items={notDatedTasks.completed}
                                showPopup={this.showPopup.bind(this)}
                                changeTaskStatus={this.changeTaskStatus.bind(this)}
-                               />
+                        />
                 </div>
-                    {this.state.popupModel != null ?
-                        <PopupTask
-                            model={this.state.popupModel}
-                            open={!!this.state.popupModel}
-                            onRequestClose={this.onPopupClose.bind(this)}
-                            changeTaskStatus={this.changeTaskStatus.bind(this)}
-                            /> : ''
-                    }
+                {this.state.popupModel != null ?
+                    <PopupTask
+                        model={this.state.popupModel}
+                        open={!!this.state.popupModel}
+                        onRequestClose={this.onPopupClose.bind(this)}
+                        changeTaskStatus={this.changeTaskStatus.bind(this)}
+                        changeTaskName={this.changeTaskName.bind(this)}
+                        changeTaskDescription={this.changeTaskDescription.bind(this)}
+                        /> : ''
+                }
             </div>
         );
     }
