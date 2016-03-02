@@ -23,31 +23,31 @@ export default class extends React.Component {
         this.props.changeTaskStatus(this.state.model.id);
     }
 
-    editTitle(e){
+    editTitle(e) {
         let value = e.target.value;
 
         this.setState({openEditTitle: !this.state.openEditTitle}, () => {
             this.state.openEditTitle ?
-                document.getElementById('editTitle').focus():
+                document.getElementById('editTitle').focus() :
                 this.props.changeTaskName(value, this.state.model.id);
         });
     }
 
-    editDescription(e){
+    editDescription(e) {
         let value = e.target.value;
 
         this.setState({openEditDescription: !this.state.openEditDescription}, () => {
             this.state.openEditDescription ?
-                document.getElementById('editDescription').focus():
+                document.getElementById('editDescription').focus() :
                 this.props.changeTaskDescription(value, this.state.model.id);
         });
     }
 
-    lostFocusTitle(){
+    lostFocusTitle() {
         this.setState({openEditTitle: false});
     }
 
-    lostFocusDescription(){
+    lostFocusDescription() {
         this.setState({openEditDescription: false});
     }
 
@@ -82,14 +82,14 @@ export default class extends React.Component {
                 onRequestClose={this.props.onRequestClose}
                 >
                 {
-                    this.state.openEditDescription?
+                    this.state.openEditDescription ?
                         <TextField
                             id='editDescription'
                             className='taskPopup__description___enabled'
                             onEnterKeyDown={this.editDescription.bind(this)}
                             hintText={this.state.model.description}
                             onBlur={this.lostFocusDescription.bind(this)}
-                        />:
+                            /> :
                         <div
                             className='taskPopup__description___disabled'
                             onClick={this.editDescription.bind(this)}>
