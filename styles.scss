@@ -253,17 +253,24 @@ body {
 }
 
 /*------------ PopupTask -----------------*/
-.taskPopup__name {
-  margin-left: 25px;
+.taskPopup__title___disabled {
+  padding: 10px 0 0 10px;
+  font-size: 20px;
+}
+
+.taskPopup__title___enabled {
+  margin-left: 10px;
 }
 
 .taskPopup__checkbox {
-  float: right;
-  top: 37px;
-  width: auto !important;
+  width : auto !important;
+  padding-left: 10px;
 }
 
-.taskPopup__description {
-  font-size: 20px !important;
-  width: 400px !important;
+.taskPopup__description___enabled{
+  float:left;
+}
+
+.taskPopup__description___disabled{
+  float:left;
 }
