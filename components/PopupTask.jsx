@@ -85,13 +85,13 @@ export default class extends React.Component {
                     this.state.openEditDescription ?
                         <TextField
                             id='editDescription'
-                            className='taskPopup__description___enabled'
+                            className='taskPopup__description'
                             onEnterKeyDown={this.editDescription.bind(this)}
                             hintText={this.state.model.description}
                             onBlur={this.lostFocusDescription.bind(this)}
                             /> :
                         <div
-                            className='taskPopup__description___disabled'
+                            className='taskPopup__description'
                             onClick={this.editDescription.bind(this)}>
                             {this.state.model.description}
                         </div>
