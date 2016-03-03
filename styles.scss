@@ -253,20 +253,37 @@ body {
 }
 
 /*------------ PopupTask -----------------*/
-.taskPopup__title___disabled {
-  padding: 10px 0 0 10px;
-  font-size: 20px;
+
+.taskPopup__title,
+.taskPopup__titleInput {
+  display: table-cell;
+  line-height: 24px !important;
+  height: 48px !important;
+  width: 100% !important;
+  font-size: 20px !important;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0 10px;
 }
 
-.taskPopup__title___enabled {
-  margin-left: 10px;
-}
-
-.taskPopup__checkbox {
-  width: auto !important;
-  padding-left: 10px;
-}
-
+.taskPopup__title,
 .taskPopup__description {
-  float: left;
+  cursor: pointer;
+}
+
+.taskPopup__description,
+.taskPopup__descriptionInput {
+  display: block;
+  margin-top: 10px;
+  width: 100% !important;
+  font-size: 16px !important;
+  height: 80px;
+  border: 1px solid transparent;
+  color: #aaa;
+  padding: 10px;
+}
+
+.taskPopup__descriptionInput {
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
