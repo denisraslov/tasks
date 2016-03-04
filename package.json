@@ -30,7 +30,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
-    "lodash": "^4.4.0",
+    "lodash": "^4.6.1",
     "redux": "^3.3.1"
   }
 }

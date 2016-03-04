@@ -1,4 +1,5 @@
 var Redux = require('redux'),
+    _ = require('lodash'),
     store;
 
 import moment from 'moment';
@@ -6,11 +7,7 @@ import moment from 'moment';
 const reducer = function (state, action) {
 
     function getTaskById(id) {
-        for (let i = 0; i < state.tasks.length; i++) {
-            if (state.tasks[i].id === id) {
-                return state.tasks[i];
-            }
-        }
+        return _.find(state.tasks, { id: id });
     }
 
     switch (action.type) {
@@ -49,25 +46,20 @@ const reducer = function (state, action) {
                         description: 'Car is sucks!',
                         completed: false,
                         date: moment().add(1, 'day').startOf('day').format('X')
-                    },
+                    }
                 ]
             };
             store.inited = true;
             break;
         case 'ADD_TASK':
-            state.tasks.push({name: action.data.name, completed: false})
+            state.tasks.push({name: action.data.name, completed: false});
             break;
         case 'CHANGE_TASK_STATUS':
             let task = getTaskById(action.data.id);
             task.completed = !task.completed;
             break;
-        case 'CHANGE_NAME':
-            task = getTaskById(action.data.id);
-            task.name = action.data.name;
-            break;
-        case 'CHANGE_DESCRIPTION':
-            task = getTaskById(action.data.id);
-            task.description = action.data.description;
+        case 'EDIT_TASK':
+            _.extend(getTaskById(action.data.id), action.data.params);
             break;
     }
 

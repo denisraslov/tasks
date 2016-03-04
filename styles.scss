@@ -86,7 +86,7 @@ body {
 /*------------ content ---------------*/
 
 .page__content {
-  height: calc(100% - 40px);
+  height: calc(100% - 49px);
 }
 
 .page__head {
@@ -154,7 +154,7 @@ body {
   }
 
   .calendar__body {
-    height: calc(100% - 50px);
+    height: calc(100% - 36px);
     overflow-y: scroll;
 
     td {
@@ -259,7 +259,7 @@ body {
   display: table-cell;
   line-height: 24px !important;
   height: 48px !important;
-  width: 100% !important;
+  width: calc(100% - 170px) !important;
   font-size: 20px !important;
   vertical-align: middle;
   cursor: pointer;
@@ -273,17 +273,35 @@ body {
 
 .taskPopup__description,
 .taskPopup__descriptionInput {
+  margin: 40px 10px 10px;
   display: block;
   margin-top: 10px;
   width: 100% !important;
-  font-size: 16px !important;
-  height: 80px;
-  border: 1px solid transparent;
-  color: #aaa;
-  padding: 10px;
+  font-size: 15px !important;
+  line-height: 24px !important;
+}
+
+.taskPopup__description {
+  min-height: 48px !important;
 }
 
 .taskPopup__descriptionInput {
-  border: 1px solid #ddd;
+  margin-top: -2px !important;
+  min-height: 46px !important;
+}
+
+.taskPopup__checkbox {
+  display: inline-block !important;
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: auto !important;
+  background-color: #ddd;
+  padding: 11px;
   border-radius: 4px;
+}
+
+.popupTask__descriptionSaveButton {
+  top: 0;
+  right: 0;
 }

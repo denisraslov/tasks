@@ -50,12 +50,8 @@ export default class extends React.Component {
         store.dispatch({type: 'CHANGE_TASK_STATUS', data: {id: id}});
     }
 
-    changeTaskName(name, id) {
-        store.dispatch({type: 'CHANGE_NAME', data: {name: name, id: id}});
-    }
-
-    changeTaskDescription(description, id) {
-        store.dispatch({type: 'CHANGE_DESCRIPTION', data: {description: description, id: id}})
+    changeTask(id, params) {
+        store.dispatch({type: 'EDIT_TASK', data: {id: id, params: params }});
     }
 
     render() {
@@ -90,9 +86,8 @@ export default class extends React.Component {
                         open={!!this.state.popupModel}
                         onRequestClose={this.onPopupClose.bind(this)}
                         changeTaskStatus={this.changeTaskStatus.bind(this)}
-                        changeTaskName={this.changeTaskName.bind(this)}
-                        changeTaskDescription={this.changeTaskDescription.bind(this)}
-                        /> : ''
+                        changeTask={this.changeTask.bind(this)}
+                    /> : ''
                 }
             </div>
         );

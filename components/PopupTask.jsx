@@ -5,6 +5,8 @@ import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Checkbox from 'material-ui/lib/checkbox';
 import TextField from 'material-ui/lib/text-field.js';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import IconDone from 'material-ui/lib/svg-icons/action/done';
 
 export default class extends React.Component {
     constructor(props) {
@@ -32,15 +34,23 @@ export default class extends React.Component {
 
     editDescription(e) {
         this.setState({openEditDescription: true }, () => {
-            ReactDOM.findDOMNode(this.refs.descriptionInput).focus();
+            ReactDOM.findDOMNode(this.refs.descriptionInput).getElementsByTagName('textarea')[1].focus();
         });
     }
 
-    lostFocusTitle() {
+    saveTitle(e) {
+        var value = e.target.value;
+
+        this.props.changeTask(this.state.model.id, { name: value });
+        //TODO: add Promise
         this.setState({openEditTitle: false});
     }
 
-    lostFocusDescription() {
+    saveDescription() {
+        var value = ReactDOM.findDOMNode(this.refs.descriptionInput).getElementsByTagName('textarea')[1].value;
+
+        this.props.changeTask(this.state.model.id, { description: value });
+        //TODO: add Promise
         this.setState({openEditDescription: false});
     }
 
@@ -66,10 +76,9 @@ export default class extends React.Component {
                             id='title'
                             ref="titleInput"
                             className='taskPopup__titleInput'
-                            onEnterKeyDown={this.editTitle.bind(this)}
-                            readOnly={false}
-                            value={this.state.model.name}
-                            onBlur={this.lostFocusTitle.bind(this)}
+                            onEnterKeyDown={this.saveTitle.bind(this)}
+                            defaultValue={this.state.model.name}
+                            onBlur={this.saveTitle.bind(this)}
 
                         /> :
                         <div
@@ -79,28 +88,51 @@ export default class extends React.Component {
                         </div>
                 }
 
+                {this.renderDescription()}
 
-                {this.state.openEditDescription ?
-                    <textarea
-                        id='description'
-                        ref="descriptionInput"
-                        className='taskPopup__descriptionInput'
-                        onEnterKeyDown={this.editDescription.bind(this)}
-                        value={this.state.model.description}
-                        onBlur={this.lostFocusDescription.bind(this)}
-                        /> :
-                    <div
-                        className='taskPopup__description'
-                        onClick={this.editDescription.bind(this)}>
-                        {this.state.model.description}
-                    </div>
-                }
-
-                <Checkbox checked={this.state.model.completed}
-                          onCheck={this.changeTaskStatus.bind(this)}
-                          className='taskPopup__checkbox'
-                    />
+                <Checkbox
+                    label="Complete"
+                    checked={this.state.model.completed}
+                    onCheck={this.changeTaskStatus.bind(this)}
+                    className='taskPopup__checkbox'
+                />
             </Dialog>
         );
+    }
+
+    renderDescription() {
+        if (this.state.openEditDescription) {
+
+            return <div style={{position:'relative'}}>
+                <FloatingActionButton
+                    style={{
+                        position: 'absolute',
+                        top: '4px',
+                        right: '0',
+                        'zIndex': 100
+                    }}
+                    mini = {true}
+                    secondary = {true}
+                    onClick={this.saveDescription.bind(this)}
+                    className="popupTask__descriptionSaveButton"
+                    >
+                    <IconDone />
+                </FloatingActionButton>
+                <TextField
+                    id='description'
+                    ref="descriptionInput"
+                    className='taskPopup__descriptionInput'
+                    multiLine={true}
+                    defaultValue={this.state.model.description}
+                />
+            </div>;
+
+        } else {
+            return <div
+                className='taskPopup__description'
+                onClick={this.editDescription.bind(this)}>
+                {this.state.model.description}
+            </div>;
+        }
     }
 }
