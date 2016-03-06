@@ -305,3 +305,26 @@ body {
   top: 0;
   right: 0;
 }
+
+/*-------------------- login ---------------------*/
+
+.page_unauth__panel {
+    width: 280px;
+    margin: 0 auto;
+    padding-top: 290px;
+}
+
+.page_login__email,
+.page_login__password {
+    display: block !important;
+    width: 100% !important;
+}
+
+.page_login__password {
+    margin-top: -8px !important;
+}
+
+.page_unauth__buttons {
+    margin-top: 28px;
+    text-align: right;
+}

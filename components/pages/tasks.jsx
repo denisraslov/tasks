@@ -1,5 +1,6 @@
 import React from 'react';
 import store from './../../store.jsx';
+import Panel from './../../components/Panel.jsx';
 import Calendar from './../../components/Calendar.jsx';
 import AdderTask from './../../components/AdderTask.jsx';
 import ListTasks from './../../components/ListTasks.jsx';
@@ -58,37 +59,40 @@ export default class extends React.Component {
         const notDatedTasks = getNotDatedTasks(this.state.tasks);
 
         return (
-            <div className='page__content page_tasks__content'>
+            <div>
+                <Panel />
+                <div className='page__content page_tasks__content'>
 
-                <Calendar
-                    tasks={this.state.tasks}
-                    showPopup={this.showPopup.bind(this)}
-                    />
+                    <Calendar
+                        tasks={this.state.tasks}
+                        showPopup={this.showPopup.bind(this)}
+                        />
 
-                <div className='page_tasks__tasksListWrap'>
-                    <AdderTask onAdd={this.addTask}/>
-                    <ListTasks title="Let's do it!"
-                               placeholder="Nothing to do! Have a nice day!"
-                               items={notDatedTasks.active}
-                               showPopup={this.showPopup.bind(this)}
-                               changeTaskStatus={this.changeTaskStatus.bind(this)}
-                        />
-                    <ListTasks title="Good job"
-                               placeholder="Nothing was done yet..."
-                               items={notDatedTasks.completed}
-                               showPopup={this.showPopup.bind(this)}
-                               changeTaskStatus={this.changeTaskStatus.bind(this)}
-                        />
+                    <div className='page_tasks__tasksListWrap'>
+                        <AdderTask onAdd={this.addTask}/>
+                        <ListTasks title="Let's do it!"
+                                   placeholder="Nothing to do! Have a nice day!"
+                                   items={notDatedTasks.active}
+                                   showPopup={this.showPopup.bind(this)}
+                                   changeTaskStatus={this.changeTaskStatus.bind(this)}
+                            />
+                        <ListTasks title="Good job"
+                                   placeholder="Nothing was done yet..."
+                                   items={notDatedTasks.completed}
+                                   showPopup={this.showPopup.bind(this)}
+                                   changeTaskStatus={this.changeTaskStatus.bind(this)}
+                            />
+                    </div>
+                    {this.state.popupModel != null ?
+                        <PopupTask
+                            model={this.state.popupModel}
+                            open={!!this.state.popupModel}
+                            onRequestClose={this.onPopupClose.bind(this)}
+                            changeTaskStatus={this.changeTaskStatus.bind(this)}
+                            changeTask={this.changeTask.bind(this)}
+                        /> : ''
+                    }
                 </div>
-                {this.state.popupModel != null ?
-                    <PopupTask
-                        model={this.state.popupModel}
-                        open={!!this.state.popupModel}
-                        onRequestClose={this.onPopupClose.bind(this)}
-                        changeTaskStatus={this.changeTaskStatus.bind(this)}
-                        changeTask={this.changeTask.bind(this)}
-                    /> : ''
-                }
             </div>
         );
     }

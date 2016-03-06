@@ -4,26 +4,24 @@ var React = require('react'),
     IndexRoute = RouterModule.IndexRoute,
     Router = RouterModule.Router,
     Route = RouterModule.Route,
-    History = require('history'),
     App = require('./app.jsx'),
+    PageLogin = require('./components/pages/login.jsx'),
     PageTasks = require('./components/pages/tasks.jsx');
+
+import { browserHistory } from 'react-router';
 
 var router = {
     getRouter: function() {
         return (
-            <Router history={this.createHistory()}>
+            <Router history={browserHistory}>
                 <Route path="/" component={App}>
                     <IndexRoute component={PageTasks}/>
                     <Route path="tasks" component={PageTasks}/>
+                    <Route path="login" component={PageLogin}/>
                     <Route path="*" component={PageTasks}/>
                 </Route>
             </Router>
         );
-    },
-    createHistory: function() {
-        return History.createHistory({
-            basename: '/tasks'
-        });
     },
     run: function() {
         ReactDOM.render(this.getRouter(), document.getElementById('content'));

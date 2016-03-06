@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import Panel from './components/Panel.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './styles.scss';
 
@@ -26,7 +25,6 @@ export default class extends React.Component {
     render() {
         return (
             <div id='page' className='page'>
-                <Panel />
                 {this.props.children}
             </div>
         );
