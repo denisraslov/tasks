@@ -5,6 +5,7 @@ var React = require('react'),
     Router = RouterModule.Router,
     Route = RouterModule.Route,
     App = require('./app.jsx'),
+    PageSignup = require('./components/pages/signup.jsx'),
     PageLogin = require('./components/pages/login.jsx'),
     PageTasks = require('./components/pages/tasks.jsx');
 
@@ -18,6 +19,7 @@ var router = {
                     <IndexRoute component={PageTasks}/>
                     <Route path="tasks" component={PageTasks}/>
                     <Route path="login" component={PageLogin}/>
+                    <Route path="signup" component={PageSignup}/>
                     <Route path="*" component={PageTasks}/>
                 </Route>
             </Router>

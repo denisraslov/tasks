@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -p 3000 .",
+    "start": "node server.js && npm run watch",
     "build": "NODE_ENV=production webpack -p",
     "watch": "webpack-dev-server --hot --progress --colors"
   },
@@ -30,6 +30,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "axios": "^0.9.1",
     "lodash": "^4.6.1",
     "redux": "^3.3.1"
   }
