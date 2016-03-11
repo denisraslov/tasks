@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import store from './../../store.jsx';
 import Panel from './../../components/Panel.jsx';
 import Calendar from './../../components/Calendar.jsx';
@@ -21,7 +22,8 @@ function getNotDatedTasks(tasks) {
     return {completed: completedTasks, active: activeTasks};
 }
 
-export default class extends React.Component {
+class TasksPage extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -66,22 +68,24 @@ export default class extends React.Component {
                     <Calendar
                         tasks={this.state.tasks}
                         showPopup={this.showPopup.bind(this)}
-                        />
+                    />
 
                     <div className='page_tasks__tasksListWrap'>
                         <AdderTask onAdd={this.addTask}/>
-                        <ListTasks title="Let's do it!"
-                                   placeholder="Nothing to do! Have a nice day!"
-                                   items={notDatedTasks.active}
-                                   showPopup={this.showPopup.bind(this)}
-                                   changeTaskStatus={this.changeTaskStatus.bind(this)}
-                            />
-                        <ListTasks title="Good job"
-                                   placeholder="Nothing was done yet..."
-                                   items={notDatedTasks.completed}
-                                   showPopup={this.showPopup.bind(this)}
-                                   changeTaskStatus={this.changeTaskStatus.bind(this)}
-                            />
+                        <ListTasks
+                            title="Let's do it!"
+                            placeholder="Nothing to do! Have a nice day!"
+                            items={notDatedTasks.active}
+                            showPopup={this.showPopup.bind(this)}
+                            changeTaskStatus={this.changeTaskStatus.bind(this)}
+                        />
+                        <ListTasks
+                            title="Good job"
+                            placeholder="Nothing was done yet..."
+                            items={notDatedTasks.completed}
+                            showPopup={this.showPopup.bind(this)}
+                            changeTaskStatus={this.changeTaskStatus.bind(this)}
+                        />
                     </div>
                     {this.state.popupModel != null ?
                         <PopupTask
@@ -97,3 +101,13 @@ export default class extends React.Component {
         );
     }
 }
+
+// Which props do we want to inject, given the global state?
+function select(state) {
+    return {
+        data: state
+    };
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(TasksPage);

@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import store from './../../store.jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
-import request from 'axios';
 
-export default class extends React.Component {
+class SignupPage extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -93,3 +94,13 @@ export default class extends React.Component {
         );
     }
 }
+
+// Which props do we want to inject, given the global state?
+function select(state) {
+    return {
+        data: state
+    };
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(SignupPage);

@@ -1,35 +1,8 @@
-var _ = require('lodash');
-
-import moment from 'moment';
 import { applyMiddleware, createStore } from 'redux';
-import promiseMiddleware from './middlewares/promise.jsx';
+import thunk from 'redux-thunk';
+import reducer from './reducer';
 
-var API_URL = 'localhost:3000';
-
-const reducer = function (state, action) {
-
-    function getTaskById(id) {
-        return _.find(state.tasks, { id: id });
-    }
-
-    switch (action.type) {
-        case 'ADD_TASK':
-            state.tasks.push({name: action.data.name, completed: false});
-            break;
-        case 'CHANGE_TASK_STATUS':
-            let task = getTaskById(action.data.id);
-            task.completed = !task.completed;
-            break;
-        case 'EDIT_TASK':
-            _.extend(getTaskById(action.data.id), action.data.params);
-            break;
-        case 'SIGN_UP':
-
-            break;
-    }
-
-    return state;
-};
+/*-------------- initial state ---------------*/
 
 var initialState = {
     tasks: [
@@ -69,6 +42,8 @@ var initialState = {
     ]
 };
 
-var store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
+/*-------------- store creating ---------------*/
 
-module.exports = store;
+var store = applyMiddleware(thunk)(createStore)(reducer, initialState);
+
+export default store;
