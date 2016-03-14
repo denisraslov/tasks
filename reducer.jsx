@@ -21,7 +21,7 @@ const reducer = function (state, action) {
                 _.extend(getTaskById(action.id), action.params);
                 break;
             case 'SIGN_UP':
-
+                debugger;
                 break;
         }
 

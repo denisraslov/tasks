@@ -53,8 +53,6 @@ class TasksPage extends React.Component {
     render() {
         const notDatedTasks = getNotDatedTasks(this.props.data.tasks);
 
-        console.log('tasks rendered');
-
         return (
             <div>
                 <Panel />

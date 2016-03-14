@@ -1,12 +1,14 @@
 import request from 'axios';
 
+const API_URL = 'http://localhost:3000/api';
+
 /*----------------- async actions -------------------*/
 
 export function signup(user) {
     return (dispatch) => {
 
         request
-            .post('localhost:3000/signup', {
+            .post(API_URL + '/signup', {
                 name: user.name,
                 email: user.email,
                 password: user.password

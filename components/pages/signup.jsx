@@ -24,15 +24,17 @@ class SignupPage extends React.Component {
     }
 
     signup() {
+        var name = this.getInputValue('name'),
+            email = this.getInputValue('email'),
+            password = this.getInputValue('password');
+
         this.setState({ processing: true });
 
-        this.dispatch.dispatch(
+        this.props.dispatch(
             actions.signup({
-                promise: request.post('localhost:3000/signup', {
-                    name: this.getInputValue('name'),
-                    email: this.getInputValue('email'),
-                    password: this.getInputValue('password')
-                })
+                name,
+                email,
+                password
             })
         );
 
@@ -58,21 +60,21 @@ class SignupPage extends React.Component {
                         Just one click to start!
                     </div>
                     <TextField
-                        rel="name"
+                        ref="name"
                         className="page_unauth__input page_signup__name"
                         hintText="Your name"
                         floatingLabelText="Your name"
                         disabled={this.state.processing}
                     />
                     <TextField
-                        rel="email"
+                        ref="email"
                         className="page_unauth__input page_signup__email"
                         hintText="Your email"
                         floatingLabelText="Your email"
                         disabled={this.state.processing}
                     />
                     <TextField
-                        rel="password"
+                        ref="password"
                         className="page_unauth__input page_signup__password"
                         hintText="Your password"
                         floatingLabelText="Your password"
