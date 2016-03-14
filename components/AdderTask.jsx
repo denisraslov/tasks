@@ -6,7 +6,7 @@ export default class extends React.Component {
         super(props);
         this.state = {
             value: ''
-        }
+        };
     }
 
     onChange(e) {
@@ -16,7 +16,7 @@ export default class extends React.Component {
     onKeyUp(e) {
         if (e.keyCode == 13) {
             this.props.onAdd(e.target.value);
-            this.setState({value: ''})
+            this.setState({value: ''});
         }
     }
 

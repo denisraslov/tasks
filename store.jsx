@@ -1,6 +1,7 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from './reducer';
+import reducer from './reducer.jsx';
+import moment from 'moment';
 
 /*-------------- initial state ---------------*/
 
@@ -44,6 +45,10 @@ var initialState = {
 
 /*-------------- store creating ---------------*/
 
-var store = applyMiddleware(thunk)(createStore)(reducer, initialState);
+var store = compose(
+    applyMiddleware(thunk),
+    //Redux Dev Tools Staff
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)(reducer, initialState);
 
 export default store;

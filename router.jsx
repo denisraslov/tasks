@@ -11,7 +11,7 @@ var React = require('react'),
 
 import { browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './store.jsx';
 
 var router = {
     getRouter: function() {

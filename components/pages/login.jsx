@@ -7,7 +7,6 @@ import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 class LoginPage extends React.Component {
-
     constructor(props) {
         super(props);
     }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import store from './../../store.jsx';
 import Panel from './../../components/Panel.jsx';
 import Calendar from './../../components/Calendar.jsx';
 import AdderTask from './../../components/AdderTask.jsx';
 import ListTasks from './../../components/ListTasks.jsx';
 import PopupTask from './../../components/PopupTask.jsx';
+import * as actions from './../../actions.jsx';
 
 function getNotDatedTasks(tasks) {
     let completedTasks = [],
@@ -23,18 +23,11 @@ function getNotDatedTasks(tasks) {
 }
 
 class TasksPage extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            tasks: store.getState().tasks
+            popupModel: null
         };
-    }
-
-    componentDidMount() {
-        store.subscribe(() => {
-            this.setState({tasks: store.getState().tasks});
-        })
     }
 
     showPopup(task) {
@@ -46,19 +39,21 @@ class TasksPage extends React.Component {
     }
 
     addTask(name) {
-        store.dispatch({type: 'ADD_TASK', data: {name: name}});
+        this.props.dispatch(actions.addTask(name));
     }
 
     changeTaskStatus(id) {
-        store.dispatch({type: 'CHANGE_TASK_STATUS', data: {id: id}});
+        this.props.dispatch(actions.changeTaskStatus(id));
     }
 
     changeTask(id, params) {
-        store.dispatch({type: 'EDIT_TASK', data: {id: id, params: params }});
+        this.props.dispatch(actions.editTask(id, params));
     }
 
     render() {
-        const notDatedTasks = getNotDatedTasks(this.state.tasks);
+        const notDatedTasks = getNotDatedTasks(this.props.data.tasks);
+
+        console.log('tasks rendered');
 
         return (
             <div>
@@ -66,12 +61,12 @@ class TasksPage extends React.Component {
                 <div className='page__content page_tasks__content'>
 
                     <Calendar
-                        tasks={this.state.tasks}
+                        tasks={this.props.data.tasks}
                         showPopup={this.showPopup.bind(this)}
                     />
 
                     <div className='page_tasks__tasksListWrap'>
-                        <AdderTask onAdd={this.addTask}/>
+                        <AdderTask onAdd={this.addTask.bind(this)}/>
                         <ListTasks
                             title="Let's do it!"
                             placeholder="Nothing to do! Have a nice day!"

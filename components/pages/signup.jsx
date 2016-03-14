@@ -7,6 +7,7 @@ import LinearProgress from 'material-ui/lib/linear-progress';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
+import * as actions from './../../actions.jsx';
 
 class SignupPage extends React.Component {
 
@@ -25,13 +26,15 @@ class SignupPage extends React.Component {
     signup() {
         this.setState({ processing: true });
 
-        store.dispatch('SIGN_UP', {
-            promise: request.post('localhost:3000/signup', {
-                name: this.getInputValue('name'),
-                email: this.getInputValue('email'),
-                password: this.getInputValue('password')
+        this.dispatch.dispatch(
+            actions.signup({
+                promise: request.post('localhost:3000/signup', {
+                    name: this.getInputValue('name'),
+                    email: this.getInputValue('email'),
+                    password: this.getInputValue('password')
+                })
             })
-        });
+        );
 
         //browserHistory.push('/tasks');
     }

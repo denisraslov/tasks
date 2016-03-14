@@ -31,6 +31,6 @@ export function changeTaskStatus(id) {
     return { type: 'CHANGE_TASK_STATUS', id };
 }
 
-export function changeTaskStatus(id, params) {
+export function editTask(id, params) {
     return { type: 'EDIT_TASK', id, params };
 }
