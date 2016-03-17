@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
-import TaskCalendar from './../components/TaskCalendar.jsx';
+import CalendarCell from './../components/CalendarCell.jsx';
 
-export default class extends React.Component {
+export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -86,24 +86,13 @@ export default class extends React.Component {
                                 return <tr key={'line'+i}>
                                     {
                                         row.map((cell) => {
-                                            return <td key={cell.moment.format('D M YYYY')}>
-                                                <div className="calendar__date">
-                                                    {cell.moment.date() + ((cell.moment.date() == 1) ? ' ' + cell.moment.format('MMMM').substr(0, 3) : '')}
-                                                </div>
-
-                                                {this.renderTasks(cell.moment.startOf('day').format('X'))}
-
-                                                {
-                                                    (cell.newMonth) &&
-                                                    <div className='calendar__monthName'
-                                                         style={{opacity: this.state.showMonthNames ? 1 : 0}}>
-                                                        {moment({
-                                                            M: cell.newMonth.month,
-                                                            y: cell.newMonth.year
-                                                        }).format('MMMM YYYY')}
-                                                    </div>
-                                                }
-                                            </td>;
+                                            return (<td key={cell.moment.format('D M YYYY')}>
+                                                <CalendarCell cell={cell}
+                                                              showMonthNames={this.state.showMonthNames}
+                                                              tasks={this.props.tasks}
+                                                              showPopup={this.props.showPopup}
+                                                              changeTask={this.props.changeTask}/>
+                                            </td>);
                                         })
                                     }
                                 </tr>;
@@ -116,14 +105,4 @@ export default class extends React.Component {
         );
     }
 
-    renderTasks(date) {
-        return this.props.tasks
-            .filter((task) => (task.date == date))
-            .map((task) => {
-                return <TaskCalendar
-                    model={task}
-                    showPopup={this.props.showPopup}
-                />
-            })
-    }
 }
