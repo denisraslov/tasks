@@ -6,7 +6,6 @@ const API_URL = 'http://localhost:3000/api';
 
 export function signup(user) {
     return (dispatch) => {
-
         request
             .post(API_URL + '/signup', {
                 name: user.name,
@@ -14,15 +13,28 @@ export function signup(user) {
                 password: user.password
             })
             .then(function() {
-                dispatch(setAccount(user));
+                dispatch(login(user.email, user.password));
+            });
+    };
+}
+
+export function login(email, password) {
+    return (dispatch) => {
+        request
+            .post(API_URL + '/auth', {
+                email: email,
+                password: password
+            })
+            .then(function() {
+                dispatch(setUser(user));
             });
     };
 }
 
 /*----------------- sync actions -------------------*/
 
-export function setAccount(user) {
-    return { type: 'SET_ACCOUNT', user };
+export function setUser(user) {
+    return { type: 'SET_USER', user };
 }
 
 export function addTask(name) {
