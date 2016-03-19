@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {DragSource} from 'react-dnd';
 
-export default class extends React.Component {
+const taskSource = {
+    beginDrag(props){
+        return {id: props.model.id};
+    }
+};
+
+function collect(connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
+class TaskCalendar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,10 +23,17 @@ export default class extends React.Component {
     }
 
     render() {
-        const model = this.state.model;
+        const {model} = this.state;
+        const {connectDragSource, isDragging} = this.props;
 
-        return (
-            <div id={'task' + model.id} className="taskCalendar" onClick={this.showPopup.bind(this)}>
+        return connectDragSource(
+            <div id={'task' + model.id}
+                 className="taskCalendar"
+                 style={{
+                    opacity: isDragging ? 0.5 : 1,
+                    cursor: 'move'
+                 }}
+                 onClick={this.showPopup.bind(this)}>
                 {this.props.model.name}
             </div>
         );
@@ -22,3 +43,5 @@ export default class extends React.Component {
         this.props.showPopup(this.state.model);
     }
 }
+
+export default DragSource('task', taskSource, collect)(TaskCalendar);
