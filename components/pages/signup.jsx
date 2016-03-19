@@ -78,7 +78,7 @@ class SignupPage extends React.Component {
         this.setState({ processing: true });
 
         this.props.dispatch(
-            actions.signup(this.getValues());
+            actions.signup(this.getValues())
         );
 
         //browserHistory.push('/tasks');
