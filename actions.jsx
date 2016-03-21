@@ -13,7 +13,7 @@ export function signup(user) {
                 email: user.email,
                 password: user.password
             })
-            .then(function() {
+            .then(function () {
                 dispatch(setAccount(user));
             });
     };
@@ -22,17 +22,21 @@ export function signup(user) {
 /*----------------- sync actions -------------------*/
 
 export function setAccount(user) {
-    return { type: 'SET_ACCOUNT', user };
+    return {type: 'SET_ACCOUNT', user};
 }
 
 export function addTask(name) {
-    return { type: 'ADD_TASK', name };
+    return {type: 'ADD_TASK', name};
 }
 
 export function changeTaskStatus(id) {
-    return { type: 'CHANGE_TASK_STATUS', id };
+    return {type: 'CHANGE_TASK_STATUS', id};
 }
 
 export function editTask(id, params) {
-    return { type: 'EDIT_TASK', id, params };
+    return {type: 'EDIT_TASK', id, params};
+}
+
+export function deleteDateTask(id) {
+    return {type: 'DELETE_DATE_TASK', id};
 }

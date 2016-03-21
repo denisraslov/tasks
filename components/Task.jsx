@@ -1,7 +1,22 @@
-import React from 'react';
-import Checkbox from 'material-ui/lib/checkbox'
+import React, {Component} from 'react';
+import Checkbox from 'material-ui/lib/checkbox';
+import {DragSource} from 'react-dnd';
 
-export default class extends React.Component {
+const taskFromList = {
+    beginDrag(props){
+        console.log(props);
+        return {id: props.model.id};
+    }
+}
+
+function collect(connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
+class Task extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,17 +29,24 @@ export default class extends React.Component {
     }
 
     render() {
-        const model = this.state.model;
+        const {model} = this.state;
+        const {connectDragSource, isDragging, mo} = this.props;
 
-        return (
-            <div id={'task' + model.id} className="task" onClick={this.showPopup.bind(this)}>
+        return connectDragSource(
+            <div id={'task' + model.id}
+                 className="task"
+                 onClick={this.showPopup.bind(this)}
+                 style={{
+                    opacity: isDragging ? 0.5 : 1,
+                    cursor: 'move'
+                 }}>
                 <Checkbox
                     className="task__checkbox"
                     checked={model.completed}
                     onCheck={this.changeTaskStatus.bind(this)}
                     onClick={(e)=> {e.stopPropagation()}}
                     />
-                {this.props.model.name}
+                {model.name}
             </div>
         );
     }
@@ -33,3 +55,5 @@ export default class extends React.Component {
         this.props.showPopup(this.state.model);
     }
 }
+
+export default DragSource('task', taskFromList, collect)(Task);

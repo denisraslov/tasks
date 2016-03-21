@@ -56,6 +56,10 @@ class TasksPage extends Component {
         this.props.dispatch(actions.changeDateTask(id, time));
     }
 
+    deleteDateTask(id) {
+        this.props.dispatch(actions.deleteDateTask(id));
+    }
+
     render() {
         const notDatedTasks = getNotDatedTasks(this.props.data.tasks);
 
@@ -74,18 +78,24 @@ class TasksPage extends Component {
                     <div className='page_tasks__tasksListWrap'>
                         <AdderTask onAdd={this.addTask.bind(this)}/>
                         <ListTasks
+                            id="activeListTasks"
                             title="Let's do it!"
                             placeholder="Nothing to do! Have a nice day!"
                             items={notDatedTasks.active}
                             showPopup={this.showPopup.bind(this)}
                             changeTaskStatus={this.changeTaskStatus.bind(this)}
+                            changeTask={this.changeTask.bind(this)}
+                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                         <ListTasks
+                            id="completedListTasks"
                             title="Good job"
                             placeholder="Nothing was done yet..."
                             items={notDatedTasks.completed}
                             showPopup={this.showPopup.bind(this)}
                             changeTaskStatus={this.changeTaskStatus.bind(this)}
+                            changeTask={this.changeTask.bind(this)}
+                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                     </div>
                     {this.state.popupModel != null ?

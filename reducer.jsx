@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const reducer = function (state, action) {
     function getTaskById(id) {
-        return _.find(state.tasks, { id: id });
+        return _.find(state.tasks, {id: id});
     }
 
     if (action.type) {
@@ -22,6 +22,9 @@ const reducer = function (state, action) {
                 break;
             case 'SIGN_UP':
                 debugger;
+                break;
+            case 'DELETE_DATE_TASK':
+                _.unset(getTaskById(action.id), 'date');
                 break;
         }
 
