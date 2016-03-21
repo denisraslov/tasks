@@ -12,11 +12,7 @@ export function signup(user) {
                 email: user.email,
                 password: user.password
             })
-<<<<<<< HEAD
             .then(function () {
-                dispatch(setAccount(user));
-=======
-            .then(function() {
                 dispatch(login(user.email, user.password));
             });
     };
@@ -29,22 +25,16 @@ export function login(email, password) {
                 email: email,
                 password: password
             })
-            .then(function() {
+            .then(function () {
                 dispatch(setUser(user));
->>>>>>> 6ee0e603899ccf494fe19f15675ecc2b3fa1cbb9
             });
     };
 }
 
 /*----------------- sync actions -------------------*/
 
-<<<<<<< HEAD
-export function setAccount(user) {
-    return {type: 'SET_ACCOUNT', user};
-=======
 export function setUser(user) {
-    return { type: 'SET_USER', user };
->>>>>>> 6ee0e603899ccf494fe19f15675ecc2b3fa1cbb9
+    return {type: 'SET_USER', user};
 }
 
 export function addTask(name) {
