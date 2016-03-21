@@ -1,10 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import store from './../../store.jsx';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
+import * as actions from './../../actions.jsx';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -16,7 +18,23 @@ class LoginPage extends React.Component {
     }
 
     login() {
-        browserHistory.push('/tasks');
+        var email = this.getInputValue('email'),
+            password = this.getInputValue('password');
+
+        this.props.dispatch(
+            actions.login({
+                email,
+                password
+            })
+        );
+    }
+
+    getRefNode(ref) {
+        return ReactDOM.findDOMNode(this.refs[ref]);
+    }
+
+    getInputValue(ref) {
+        return this.getRefNode(ref).getElementsByTagName('input')[0].value;
     }
 
     render() {
@@ -30,11 +48,13 @@ class LoginPage extends React.Component {
                         className="page_unauth__input page_login__email"
                         hintText="Email"
                         floatingLabelText="Email"
+                        ref="email"
                     />
                     <TextField
                         className="page_unauth__input page_login__password"
                         hintText="Password"
                         floatingLabelText="Password"
+                        ref="password"
                     />
                     <div className="page_unauth__buttons">
                         <FlatButton

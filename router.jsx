@@ -14,23 +14,32 @@ import { Provider } from 'react-redux';
 import store from './store.jsx';
 
 var router = {
-    getRouter: function() {
+    renderRouter: function() {
         return (
             <Provider store={store}>
                 <Router history={browserHistory}>
-                    <Route path="/" component={App}>
-                        <IndexRoute component={PageTasks}/>
-                        <Route path="tasks" component={PageTasks}/>
-                        <Route path="login" component={PageLogin}/>
-                        <Route path="signup" component={PageSignup}/>
-                        <Route path="*" component={PageTasks}/>
-                    </Route>
+                    {this.renderRoutes()}
                 </Router>
             </Provider>
         );
     },
+    renderRoutes: function() {
+        console.log(store.user);
+        if (store.user) {
+            return <Route path="/" component={App}>
+                <Route path="tasks" component={PageTasks}/>
+                <Route path="*" component={PageTasks}/>
+            </Route>;
+        } else {
+            return <Route path="/" component={App}>
+                <Route path="login" component={PageLogin}/>
+                <Route path="signup" component={PageSignup}/>
+                <Route path="*" component={PageLogin}/>
+            </Route>;
+        }
+    },
     run: function() {
-        ReactDOM.render(this.getRouter(), document.getElementById('content'));
+        ReactDOM.render(this.renderRouter(), document.getElementById('content'));
     }
 };
 

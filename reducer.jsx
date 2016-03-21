@@ -20,8 +20,8 @@ const reducer = function (state, action) {
             case 'EDIT_TASK':
                 _.extend(getTaskById(action.id), action.params);
                 break;
-            case 'SIGN_UP':
-                debugger;
+            case 'SET_USER':
+                state.user = action.user;
                 break;
             case 'DELETE_DATE_TASK':
                 _.unset(getTaskById(action.id), 'date');
