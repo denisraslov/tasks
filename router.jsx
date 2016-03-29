@@ -25,7 +25,7 @@ var router = {
     },
     renderRoutes: function () {
         console.log(store.user);
-        if (store.user) {
+        if (true) {
             return <Route path="/" component={App}>
                 <IndexRoute component={PageTasks}/>
                 <Route path="tasks" component={PageTasks}/>

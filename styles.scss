@@ -94,6 +94,7 @@ body {
 .page__content {
   position: absolute;
   height: calc(100% - 49px);
+  width: 100%;
 }
 
 .page__head {
@@ -131,13 +132,13 @@ body {
   table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 
     tr {
       width: 100%;
 
       td {
         vertical-align: top;
-        min-width: 110px;
         width: auto;
 
         padding: 10px;
@@ -182,7 +183,13 @@ body {
   }
 }
 
-.calendar__date {
+/*-------------- calendar cell -----------------*/
+
+.calendarCell_over {
+    background-color: #FFF9C4;
+}
+
+.calendarCell__date {
   font-size: 13px;
   padding-bottom: 6px;
 }
@@ -208,6 +215,16 @@ body {
   padding: 0 20px 20px;
 }
 
+.listTasks__body {
+    border-radius: 4px;
+}
+
+.listTasks_over {
+    .listTasks__body {
+        background-color: #FFF9C4;
+    }
+}
+
 .listTasks__title {
   font-size: 12px;
   font-weight: bold;
@@ -216,7 +233,7 @@ body {
 
 .listTasks__placeholder {
   color: #CFD8DC;
-  margin: 13px;
+  padding: 13px;
 }
 
 .task {

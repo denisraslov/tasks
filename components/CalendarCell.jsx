@@ -12,8 +12,7 @@ const cellTarget = {
 function collect(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver(),
-
+        isOver: monitor.isOver()
     }
 }
 
@@ -28,13 +27,11 @@ class CalendarCell extends Component {
 
     render() {
         const {connectDropTarget, isOver} = this.props;
+        var className = 'calendarCell' + (isOver ? ' calendarCell_over' : '');
 
         return connectDropTarget(
-            <div style={{
-                width: '100%',
-                height: '100%'
-            }}>
-                <div className="calendar__date">
+            <td key={this.props.date} className={className}>
+                <div className="calendarCell__date">
                     {this.state.cell.moment.date() + ((this.state.cell.moment.date() == 1) ? ' ' + this.state.cell.moment.format('MMMM').substr(0, 3) : '')}
                 </div>
 
@@ -42,7 +39,7 @@ class CalendarCell extends Component {
 
                 {
                     (this.state.cell.newMonth) &&
-                    <div className='calendar__monthName'
+                    <div className='calendarCell__monthName'
                          style={{opacity: this.state.showMonthNames ? 1 : 0}}>
                         {moment({
                             M: this.state.cell.newMonth.month,
@@ -50,21 +47,7 @@ class CalendarCell extends Component {
                         }).format('MMMM YYYY')}
                     </div>
                 }
-
-                {
-                    isOver &&
-                    <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            height: '100%',
-                            width: '100%',
-                            zIndex: 1,
-                            opacity: 0.5,
-                            backgroundColor: 'yellow'
-                        }}/>
-                }
-            </div>
+            </td>
         );
     }
 
@@ -81,4 +64,3 @@ class CalendarCell extends Component {
 }
 
 export default DropTarget('task', cellTarget, collect)(CalendarCell);
-

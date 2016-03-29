@@ -86,13 +86,14 @@ export default class extends Component {
                                 return <tr key={'line'+i}>
                                     {
                                         row.map((cell) => {
-                                            return (<td key={cell.moment.format('D M YYYY')}>
-                                                <CalendarCell cell={cell}
-                                                              showMonthNames={this.state.showMonthNames}
-                                                              tasks={this.props.tasks}
-                                                              showPopup={this.props.showPopup}
-                                                              changeTask={this.props.changeTask}/>
-                                            </td>);
+                                            return (
+                                                <CalendarCell
+                                                    date={cell.moment.format('D M YYYY')}
+                                                    cell={cell}
+                                                    showMonthNames={this.state.showMonthNames}
+                                                    tasks={this.props.tasks}
+                                                    showPopup={this.props.showPopup}
+                                                    changeTask={this.props.changeTask}/>);
                                         })
                                     }
                                 </tr>;
