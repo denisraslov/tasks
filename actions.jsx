@@ -1,4 +1,6 @@
 import request from 'axios';
+import { browserHistory } from 'react-router';
+import { push } from 'react-router-redux'
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -25,8 +27,9 @@ export function login(email, password) {
                 email: email,
                 password: password
             })
-            .then(function () {
-                dispatch(setUser(user));
+            .then(function(req) {
+                dispatch(setUser(req.data));
+                dispatch(push('/tasks'));
             });
     };
 }

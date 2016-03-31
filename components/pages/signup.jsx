@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import { browserHistory } from 'react-router';
 import { validate } from 'revalidator';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 import store from './../../store.jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
 import TextField from 'material-ui/lib/text-field';
@@ -22,7 +24,7 @@ class SignupPage extends React.Component {
     }
 
     goToLogin() {
-        browserHistory.push('/login');
+        this.props.dispatch(push('/login'))
     }
 
     validate() {
@@ -75,13 +77,14 @@ class SignupPage extends React.Component {
             return;
         }
 
-        this.setState({ processing: true });
+        this.setState({
+            processing: true,
+            errors: {}
+         });
 
         this.props.dispatch(
             actions.signup(this.getValues())
         );
-
-        //browserHistory.push('/tasks');
     }
 
     getRefNode(ref) {
@@ -149,7 +152,7 @@ class SignupPage extends React.Component {
 // Which props do we want to inject, given the global state?
 function select(state) {
     return {
-        data: state
+        data: state.app
     };
 }
 

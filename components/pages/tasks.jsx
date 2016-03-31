@@ -116,7 +116,7 @@ class TasksPage extends Component {
 // Which props do we want to inject, given the global state?
 function select(state) {
     return {
-        data: state
+        data: state.app
     };
 }
 

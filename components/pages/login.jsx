@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 import store from './../../store.jsx';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -14,7 +15,7 @@ class LoginPage extends React.Component {
     }
 
     goToSignup() {
-        browserHistory.push('/signup');
+        this.props.dispatch(push('/signup'));
     }
 
     login() {
@@ -22,10 +23,7 @@ class LoginPage extends React.Component {
             password = this.getInputValue('password');
 
         this.props.dispatch(
-            actions.login({
-                email,
-                password
-            })
+            actions.login(email, password)
         );
     }
 
@@ -77,7 +75,7 @@ class LoginPage extends React.Component {
 // Which props do we want to inject, given the global state?
 function select(state) {
     return {
-        data: state
+        data: state.app
     };
 }
 
