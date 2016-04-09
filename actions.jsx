@@ -34,7 +34,27 @@ export function login(email, password) {
     };
 }
 
+export function checkAuth() {
+    return (dispatch) => {
+        request
+            .get(API_URL + '/user')
+            .then(function(req) {
+                dispatch(setUser(req.data));
+                dispatch(endAuthChecking());
+                dispatch(push('/tasks'));
+            })
+            .catch(function(req) {
+                dispatch(endAuthChecking());
+                dispatch(push('/login'));
+            });
+    };
+}
+
 /*----------------- sync actions -------------------*/
+
+export function endAuthChecking() {
+    return {type: 'END_AUTH_CHECKING'};
+}
 
 export function setUser(user) {
     return {type: 'SET_USER', user};

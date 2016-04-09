@@ -20,6 +20,9 @@ const reducer = function (state, action) {
             case 'EDIT_TASK':
                 _.extend(getTaskById(action.id), action.params);
                 break;
+            case 'END_AUTH_CHECKING':
+                state.isAuthChecked = true;
+                break;
             case 'SET_USER':
                 state.user = action.user;
                 break;
