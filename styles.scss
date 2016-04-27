@@ -58,6 +58,25 @@ body {
   white-space: nowrap;
 }
 
+.loader {
+  display: inline-block;
+  position: relative;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+}
+
+.loader__icon {
+  fill: rgb(0, 188, 212) !important;
+  height: 50px !important;
+  width: 50px !important;
+  margin: 27px !important;
+}
+
+.loader__icon,
+.loader__spinner {
+  position: absolute !important;
+}
+
 /*----------- panel --------------*/
 
 .panel {
