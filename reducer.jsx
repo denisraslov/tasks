@@ -23,6 +23,12 @@ const reducer = function (state, action) {
             case 'END_AUTH_CHECKING':
                 state.isAuthChecked = true;
                 break;
+            case 'SET_ERROR':
+                state.error = action.error;
+                break;
+            case 'REMOVE_ERROR':
+                state.error = null;
+                break;
             case 'SET_USER':
                 state.user = action.user;
                 break;

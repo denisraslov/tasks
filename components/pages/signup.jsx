@@ -63,7 +63,7 @@ class SignupPage extends React.Component {
 
         errors.forEach(error => {
             parsedErrors[error.property] = _.capitalize(error.property) + ' ' + error.message;
-        })
+        });
 
         this.setState({ errors: parsedErrors });
     }
@@ -73,7 +73,7 @@ class SignupPage extends React.Component {
 
         errors = this.validate();
         if (errors.length) {
-            this.showErrors(errors)
+            this.showErrors(errors);
             return;
         }
 
@@ -124,6 +124,7 @@ class SignupPage extends React.Component {
                     <TextField
                         ref="password"
                         className="page_unauth__input page_signup__password"
+                        type="password"
                         hintText="Your password"
                         floatingLabelText="Your password"
                         errorText={this.state.errors.password}

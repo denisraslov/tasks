@@ -19,7 +19,7 @@ export default function WrapWithInitAuth(DecoratedPage) {
             );
         }
 
-        componentDidMount () {
+        componentDidMount() {
             if (!this.props.isAuthChecked) {
                 this.props.dispatch(actions.checkAuth());
             }
