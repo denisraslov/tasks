@@ -1,7 +1,7 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import { routerReducer, syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
-import appReducer from './reducer.jsx';
+import appReducer from './reducer';
 import moment from 'moment';
 
 /*-------------- initial state ---------------*/

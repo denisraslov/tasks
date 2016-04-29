@@ -5,12 +5,12 @@ import { browserHistory } from 'react-router';
 import { validate } from 'revalidator';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux'
-import store from './../../store.jsx';
+import store from './../../store';
 import LinearProgress from 'material-ui/lib/linear-progress';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
-import * as actions from './../../actions.jsx';
+import * as actions from './../../actions';
 
 class SignupPage extends React.Component {
 

@@ -6,14 +6,14 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { routerReducer, syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import InitAuthWrapper from './components/InitAuth.jsx';
-import { getStore } from './store.jsx'
+import { getStore } from './store'
 
 import App from './components/App.jsx'
 import PageSignup from './components/pages/signup.jsx'
 import PageLogin from './components/pages/login.jsx'
 import PageTasks from './components/pages/tasks.jsx'
 
-const store = getStore(browserHistory);
+const store = getStore(browserHistory)
 const history = syncHistoryWithStore(browserHistory, store)
 
 const UserIsNotAuthenticated = UserAuthWrapper({

@@ -18,11 +18,14 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                loaders: ["react-hot", 'jsx?harmony', "babel-loader"]
+                test: /\.js$|\.jsx$/,
+                loaders: ['react-hot', 'babel'],
+                exclude: /node_modules/
             },
-            { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
+            }
         ]
     }
 };

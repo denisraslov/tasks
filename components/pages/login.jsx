@@ -4,13 +4,13 @@ import { validate } from 'revalidator'
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import store from './../../store.jsx'
+import store from './../../store'
 import Snackbar from 'material-ui/lib/snackbar'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
-import * as actions from './../../actions.jsx'
+import * as actions from './../../actions'
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -106,7 +106,7 @@ class LoginPage extends React.Component {
                 <Snackbar
                     open={!!this.props.data.error}
                     message={this.props.data.error || ''}
-                    autoHideDuration={10000}
+                    autoHideDuration={3000}
                     onRequestClose={this.handleErrorCloseRequest.bind(this)}
                 />
 
