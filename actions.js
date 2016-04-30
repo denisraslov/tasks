@@ -1,15 +1,19 @@
-import request from 'axios';
+import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { push } from 'react-router-redux'
+import Cookies from 'js-cookie'
 
-const API_URL = 'http://localhost:3000/api';
+const request = axios.create({
+    baseURL: 'http://localhost:3000/api',
+    withCredentials: true
+});
 
 /*----------------- async actions -------------------*/
 
 export function signup(user) {
     return (dispatch) => {
         request
-            .post(API_URL + '/signup', {
+            .post('/signup', {
                 name: user.name,
                 email: user.email,
                 password: user.password
@@ -23,7 +27,7 @@ export function signup(user) {
 export function login(email, password) {
     return (dispatch) => {
         request
-            .post(API_URL + '/auth', {
+            .post('/auth', {
                 email: email,
                 password: password
             })
@@ -37,7 +41,7 @@ export function login(email, password) {
 export function checkAuth() {
     return (dispatch) => {
         request
-            .get(API_URL + '/user')
+            .get('/user')
             .then(function(req) {
                 dispatch(setUser(req.data));
                 dispatch(endAuthChecking());
@@ -51,6 +55,11 @@ export function checkAuth() {
 }
 
 /*----------------- sync actions -------------------*/
+
+export function logout() {
+    Cookies.remove('token', { path: '/' });
+    return {type: 'LOGOUT'};
+}
 
 export function endAuthChecking() {
     return {type: 'END_AUTH_CHECKING'};

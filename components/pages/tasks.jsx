@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import Panel from './../../components/Panel.jsx';
-import Calendar from './../../components/Calendar.jsx';
-import AdderTask from './../../components/AdderTask.jsx';
-import ListTasks from './../../components/ListTasks.jsx';
-import PopupTask from './../../components/PopupTask.jsx';
-import * as actions from './../../actions.jsx';
-import {DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import Panel from './../../components/Panel.jsx'
+import Calendar from './../../components/Calendar.jsx'
+import AdderTask from './../../components/AdderTask.jsx'
+import ListTasks from './../../components/ListTasks.jsx'
+import PopupTask from './../../components/PopupTask.jsx'
+import * as actions from './../../actions.jsx'
+import { push } from 'react-router-redux'
+import {DragDropContext} from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 function getNotDatedTasks(tasks) {
     let completedTasks = [],
@@ -60,12 +61,17 @@ class TasksPage extends Component {
         this.props.dispatch(actions.deleteDateTask(id));
     }
 
+    logout() {
+        this.props.dispatch(actions.logout());
+        this.props.dispatch(push('/login'));
+    }
+
     render() {
         const notDatedTasks = getNotDatedTasks(this.props.data.tasks);
 
         return (
             <div>
-                <Panel />
+                <Panel onLogout={this.logout.bind(this)} />
 
                 <div className='page__content page_tasks__content'>
 

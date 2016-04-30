@@ -9,7 +9,7 @@ export default class extends React.Component {
     render() {
         return (
             <div id='panel' className='panel'>
-                <Menu />
+                <Menu onLogout={this.props.onLogout} />
             </div>
         );
     }

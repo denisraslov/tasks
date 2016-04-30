@@ -26,6 +26,9 @@ const reducer = function (state, action) {
             case 'SET_USER':
                 state.user = action.user;
                 break;
+            case 'LOGOUT':
+                state.user = null;
+                break;
             case 'DELETE_DATE_TASK':
                 _.unset(getTaskById(action.id), 'date');
                 break;
