@@ -1,6 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from './../actions.jsx';
+import React from 'react'
+import { connect } from 'react-redux'
+import IconDone from 'material-ui/lib/svg-icons/action/done'
+import CircularProgress from 'material-ui/lib/circular-progress'
+import * as actions from './../actions'
 
 export default function WrapWithInitAuth(DecoratedPage) {
 
@@ -17,7 +19,7 @@ export default function WrapWithInitAuth(DecoratedPage) {
             );
         }
 
-        componentDidMount () {
+        componentDidMount() {
             if (!this.props.isAuthChecked) {
                 this.props.dispatch(actions.checkAuth());
             }
@@ -28,7 +30,10 @@ export default function WrapWithInitAuth(DecoratedPage) {
         }
 
         renderLoading() {
-            return <div>Loading...</div>;
+            return <div className="loader">
+                <IconDone className="loader__icon" />
+                <CircularProgress className="loader__spinner" size={1.5} />
+            </div>;
         }
     }
 

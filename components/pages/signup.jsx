@@ -5,12 +5,12 @@ import { browserHistory } from 'react-router';
 import { validate } from 'revalidator';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux'
-import store from './../../store.jsx';
+import store from './../../store';
 import LinearProgress from 'material-ui/lib/linear-progress';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
-import * as actions from './../../actions.jsx';
+import * as actions from './../../actions';
 
 class SignupPage extends React.Component {
 
@@ -63,7 +63,7 @@ class SignupPage extends React.Component {
 
         errors.forEach(error => {
             parsedErrors[error.property] = _.capitalize(error.property) + ' ' + error.message;
-        })
+        });
 
         this.setState({ errors: parsedErrors });
     }
@@ -73,7 +73,7 @@ class SignupPage extends React.Component {
 
         errors = this.validate();
         if (errors.length) {
-            this.showErrors(errors)
+            this.showErrors(errors);
             return;
         }
 
@@ -124,6 +124,7 @@ class SignupPage extends React.Component {
                     <TextField
                         ref="password"
                         className="page_unauth__input page_signup__password"
+                        type="password"
                         hintText="Your password"
                         floatingLabelText="Your password"
                         errorText={this.state.errors.password}
