@@ -13,7 +13,7 @@ const request = axios.create({
 export function signup(data) {
     return (dispatch) => {
         request
-            .post(API_URL + '/signup', {
+            .post('/signup', {
                 name: data.name,
                 email: data.email,
                 password: data.password
@@ -22,7 +22,9 @@ export function signup(data) {
                 dispatch(login(data));
             })
             .catch(function(req) {
-                dispatch(setError('Signup error!'));
+                if (req.data) {
+                    dispatch(setError(req.data.error.message || 'Signup error!'));
+                }
             });
     };
 }
@@ -30,7 +32,7 @@ export function signup(data) {
 export function login(data) {
     return (dispatch) => {
         request
-            .post(API_URL + '/auth', {
+            .post('/auth', {
                 email: data.email,
                 password: data.password
             })
@@ -39,7 +41,9 @@ export function login(data) {
                 dispatch(push('/tasks'));
             })
             .catch(function(req) {
-                dispatch(setError('Login error!'));
+                if (req.data) {
+                    dispatch(setError(req.data.error.message || 'Login error!'));
+                }
             });
     };
 }
