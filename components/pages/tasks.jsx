@@ -9,6 +9,7 @@ import * as actions from './../../actions'
 import { push } from 'react-router-redux'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
+import DataWrapper from './../../components/DataWrapper.jsx';
 
 function getNotDatedTasks(tasks) {
     let completedTasks = [],
@@ -126,5 +127,4 @@ function select(state) {
     };
 }
 
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(DragDropContext(HTML5Backend)(TasksPage));
+export default DataWrapper(connect(select)(DragDropContext(HTML5Backend)(TasksPage)));

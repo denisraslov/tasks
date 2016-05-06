@@ -1,16 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import _ from 'lodash';
-import { browserHistory } from 'react-router';
-import { validate } from 'revalidator';
-import { connect } from 'react-redux';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import _ from 'lodash'
+import { browserHistory } from 'react-router'
+import { validate } from 'revalidator'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import store from './../../store';
-import LinearProgress from 'material-ui/lib/linear-progress';
-import TextField from 'material-ui/lib/text-field';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import * as actions from './../../actions';
+import store from './../../store'
+import LinearProgress from 'material-ui/lib/linear-progress'
+import TextField from 'material-ui/lib/text-field'
+import FlatButton from 'material-ui/lib/flat-button'
+import RaisedButton from 'material-ui/lib/raised-button'
+import DataWrapper from './../../components/DataWrapper.jsx'
+import * as actions from './../../actions'
 
 class SignupPage extends React.Component {
 
@@ -100,7 +101,6 @@ class SignupPage extends React.Component {
 
         return (
             <div className={contentClasses}>
-                {this.state.processing ? <LinearProgress mode="indeterminate"/> : ''}
                 <div className="page_unauth__panel">
                     <div className="page_unauth__text">
                         Just one click to start!
@@ -157,5 +157,4 @@ function select(state) {
     };
 }
 
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(SignupPage);
+export default DataWrapper(connect(select)(SignupPage));

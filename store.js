@@ -9,7 +9,7 @@ import moment from 'moment';
 var initialState = {
     app: {
         user: null,
-        tasks: [
+        localTasks: [
             {
                 id: 1,
                 name: 'Do some work',
@@ -49,16 +49,24 @@ var initialState = {
 
 /*-------------- store creating ---------------*/
 
-export function getStore(history) {
+var store;
+
+export function getStore() {
+    return store;
+}
+
+export function createNewStore(history) {
     const reducer = combineReducers({
         app: appReducer,
         routing: routerReducer
     })
     const routingMiddleware = routerMiddleware(history)
 
-    return compose(
+    store = compose(
         applyMiddleware(routingMiddleware, thunk),
         //Redux Dev Tools Staff
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )(createStore)(reducer, initialState);
+
+    return store;
 }

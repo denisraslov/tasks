@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { push } from 'react-router-redux'
+import { getStore } from './store'
+import pathsData from './data'
 import Cookies from 'js-cookie'
 
 const request = axios.create({
@@ -10,8 +12,27 @@ const request = axios.create({
 
 /*----------------- async actions -------------------*/
 
+export function loadTasks(path) {
+    return (dispatch) => {
+        dispatch(loading());
+        request
+            .get('/tasks')
+            .then(function(req) {
+                dispatch(loaded());
+                dispatch(setTasks(req.data));
+                if (path) {
+                    dispatch(push(path));
+                }
+            })
+            .catch(function(req) {
+                dispatch(setError(req.data ? req.data.error.message : 'Request error!'));
+            });
+    };
+}
+
 export function signup(data) {
     return (dispatch) => {
+        dispatch(loading());
         request
             .post('/signup', {
                 name: data.name,
@@ -22,6 +43,7 @@ export function signup(data) {
                 dispatch(login(data));
             })
             .catch(function(req) {
+                dispatch(loaded());
                 if (req.data) {
                     dispatch(setError(req.data.error.message || 'Signup error!'));
                 }
@@ -31,16 +53,19 @@ export function signup(data) {
 
 export function login(data) {
     return (dispatch) => {
+        dispatch(loading());
         request
             .post('/auth', {
                 email: data.email,
                 password: data.password
             })
             .then(function(req) {
+                dispatch(loaded());
                 dispatch(setUser(req.data));
-                dispatch(push('/tasks'));
+                dispatch(redirect('/tasks'));
             })
             .catch(function(req) {
+                dispatch(loaded());
                 if (req.data) {
                     dispatch(setError(req.data.error.message || 'Login error!'));
                 }
@@ -53,15 +78,29 @@ export function checkAuth() {
         request
             .get('/user')
             .then(function(req) {
-                dispatch(setUser(req.data));
-                dispatch(endAuthChecking());
-                dispatch(push('/tasks'));
+                dispatch(endAuthChecking(req.data));
             })
             .catch(function(req) {
                 dispatch(endAuthChecking());
-                dispatch(push('/login'));
             });
     };
+}
+
+/*-------------------- redirect -----------------------*/
+
+export function redirect(path) {
+    return (dispatch) => {
+        var pathData = pathsData[path.split('/')[1]],
+            store = getStore();
+
+        debugger;    
+
+        if (pathData && !store[pathData.stateProp]) {
+            dispatch(pathData.loadAction(path));
+        } else {
+            dispatch(push(path));
+        }
+    }
 }
 
 /*----------------- sync actions -------------------*/
@@ -71,8 +110,16 @@ export function logout() {
     return {type: 'LOGOUT'};
 }
 
-export function endAuthChecking() {
-    return {type: 'END_AUTH_CHECKING'};
+export function loading() {
+    return {type: 'LOADING'};
+}
+
+export function loaded() {
+    return {type: 'LOADED'};
+}
+
+export function endAuthChecking(user) {
+    return {type: 'END_AUTH_CHECKING', user };
 }
 
 export function setError(error) {
@@ -81,6 +128,14 @@ export function setError(error) {
 
 export function removeError() {
     return {type: 'REMOVE_ERROR'};
+}
+
+export function setTasks(tasks) {
+    return {type: 'SET_TASKS', tasks};
+}
+
+export function clearTasks() {
+    return {type: 'CLEAR_TASKS'};
 }
 
 export function setUser(user) {

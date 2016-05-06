@@ -22,7 +22,7 @@ class Task extends Component {
             model: this.props.model
         };
     }
-
+    
     changeTaskStatus(e) {
         this.props.changeTaskStatus(this.state.model.id);
     }

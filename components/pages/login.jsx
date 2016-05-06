@@ -10,6 +10,7 @@ import LinearProgress from 'material-ui/lib/linear-progress'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
+import DataWrapper from './../../components/DataWrapper.jsx'
 import * as actions from './../../actions'
 
 class LoginPage extends React.Component {
@@ -17,8 +18,7 @@ class LoginPage extends React.Component {
         super(props);
 
         this.state = {
-            errors: {},
-            processing: false
+            errors: {}
         };
     }
 
@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
     }
 
     goToSignup() {
-        this.props.dispatch(push('/signup'));
+        this.props.dispatch(actions.redirect('/signup'));
     }
 
     validate() {
@@ -159,5 +159,4 @@ function select(state) {
     };
 }
 
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(LoginPage);
+export default DataWrapper(connect(select)(LoginPage));

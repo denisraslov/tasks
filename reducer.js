@@ -22,6 +22,7 @@ const reducer = function (state, action) {
                 break;
             case 'END_AUTH_CHECKING':
                 state.isAuthChecked = true;
+                state.user = action.user;
                 break;
             case 'SET_ERROR':
                 state.error = action.error;
@@ -32,8 +33,20 @@ const reducer = function (state, action) {
             case 'SET_USER':
                 state.user = action.user;
                 break;
+            case 'SET_TASKS':
+                state.tasks = action.tasks;
+                break;
+            case 'CLEAR_TASKS':
+                state.tasks = null;
+                break;
             case 'LOGOUT':
                 state.user = null;
+                break;
+            case 'LOADING':
+                state.loading = true;
+                break;
+            case 'LOADED':
+                state.loading = false;
                 break;
             case 'DELETE_DATE_TASK':
                 _.unset(getTaskById(action.id), 'date');

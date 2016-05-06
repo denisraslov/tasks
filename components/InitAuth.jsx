@@ -12,11 +12,11 @@ export default function WrapWithInitAuth(DecoratedPage) {
         }
 
         render() {
-            return (
-                this.props.isAuthChecked
-                    ? this.renderPage()
-                    : this.renderLoading()
-            );
+            if (!this.props.isAuthChecked) {
+                return this.renderLoading();
+            } else {
+                return this.renderPage();
+            }
         }
 
         componentDidMount() {
