@@ -22,7 +22,7 @@ class Task extends Component {
             model: this.props.model
         };
     }
-    
+
     changeTaskStatus(e) {
         this.props.changeTaskStatus(this.state.model.id);
     }
@@ -45,7 +45,7 @@ class Task extends Component {
                     onCheck={this.changeTaskStatus.bind(this)}
                     onClick={(e)=> {e.stopPropagation()}}
                     />
-                {model.name}
+                {model.title}
             </div>
         );
     }

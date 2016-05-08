@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import Snackbar from 'material-ui/lib/snackbar'
+import * as actions from './../../actions'
 
 export default function Wrap(DecoratedPage) {
 

@@ -34,7 +34,7 @@ class TaskCalendar extends Component {
                     cursor: 'move'
                  }}
                  onClick={this.showPopup.bind(this)}>
-                {this.props.model.name}
+                {this.props.model.title}
             </div>
         );
     }

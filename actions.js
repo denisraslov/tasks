@@ -30,6 +30,24 @@ export function loadTasks(path) {
     };
 }
 
+export function addTask(title) {
+    return (dispatch) => {
+        dispatch(loading());
+        request
+            .post('/tasks', {
+                title: title
+            })
+            .then(function(req) {
+                dispatch(loaded());
+                dispatch(addTaskToState(req.data));
+            })
+            .catch(function(req) {
+                dispatch(loaded());
+                dispatch(setError(req.data ? req.data.error.message : 'Request error!'));
+            });
+    };
+}
+
 export function signup(data) {
     return (dispatch) => {
         dispatch(loading());
@@ -141,8 +159,8 @@ export function setUser(user) {
     return {type: 'SET_USER', user};
 }
 
-export function addTask(name) {
-    return {type: 'ADD_TASK', name};
+export function addTaskToState(task) {
+    return {type: 'ADD_TASK', task};
 }
 
 export function changeTaskStatus(id) {

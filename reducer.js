@@ -11,7 +11,7 @@ const reducer = function (state, action) {
     if (action.type) {
         switch (action.type) {
             case 'ADD_TASK':
-                state.tasks.push({name: action.name, completed: false});
+                state.tasks.push(action.task);
                 break;
             case 'CHANGE_TASK_STATUS':
                 let task = getTaskById(action.id);

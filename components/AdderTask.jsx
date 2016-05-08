@@ -15,8 +15,9 @@ export default class extends React.Component {
 
     onKeyUp(e) {
         if (e.keyCode == 13) {
-            this.props.onAdd(e.target.value);
+            let value = e.target.value;
             this.setState({value: ''});
+            this.props.onAdd(value);
         }
     }
 
