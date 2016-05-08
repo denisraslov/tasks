@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import IconDone from 'material-ui/lib/svg-icons/action/done'
 import CircularProgress from 'material-ui/lib/circular-progress'
-import LinearProgress from 'material-ui/lib/linear-progress'
-import pathsData from './../data'
-import * as actions from './../actions'
+import pathsData from './../../data'
+import * as actions from './../../actions'
 
-export default function WrapWithDataLoader(DecoratedPage) {
+export default function Wrap(DecoratedPage) {
 
     class DataLoader extends React.Component {
         constructor(props) {
@@ -49,10 +48,7 @@ export default function WrapWithDataLoader(DecoratedPage) {
         }
 
         renderPage() {
-            return <div>
-                {this.props.data.loading ? <LinearProgress mode="indeterminate"/> : ''}
-                <DecoratedPage {...this.props} />
-                </div>;
+            return <DecoratedPage {...this.props} />;
         }
 
         renderLoading() {

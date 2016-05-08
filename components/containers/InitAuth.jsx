@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import IconDone from 'material-ui/lib/svg-icons/action/done'
 import CircularProgress from 'material-ui/lib/circular-progress'
-import * as actions from './../actions'
+import * as actions from './../../actions'
 
-export default function WrapWithInitAuth(DecoratedPage) {
+export default function Wrap(DecoratedPage) {
 
     class InitAuthWrapper extends React.Component {
         constructor(props) {

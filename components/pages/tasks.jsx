@@ -9,7 +9,8 @@ import * as actions from './../../actions'
 import { push } from 'react-router-redux'
 import {DragDropContext} from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-import DataWrapper from './../../components/DataWrapper.jsx';
+import InitDataWrapper from './../../components/containers/InitData.jsx'
+import PageWrapper from './../../components/containers/Page.jsx'
 
 function getNotDatedTasks(tasks) {
     let completedTasks = [],
@@ -127,4 +128,4 @@ function select(state) {
     };
 }
 
-export default DataWrapper(connect(select)(DragDropContext(HTML5Backend)(TasksPage)));
+export default PageWrapper(InitDataWrapper(connect(select)(DragDropContext(HTML5Backend)(TasksPage))));

@@ -10,7 +10,8 @@ import LinearProgress from 'material-ui/lib/linear-progress'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
-import DataWrapper from './../../components/DataWrapper.jsx'
+import InitDataWrapper from './../../components/containers/InitData.jsx'
+import PageWrapper from './../../components/containers/Page.jsx'
 import * as actions from './../../actions'
 
 class SignupPage extends React.Component {
@@ -97,10 +98,8 @@ class SignupPage extends React.Component {
     }
 
     render() {
-        var contentClasses = 'page_unauth__content ' + (this.state.processing ? 'page_unauth__contentProcessing' : '');
-
         return (
-            <div className={contentClasses}>
+            <div className="page_unauth__content">
                 <div className="page_unauth__panel">
                     <div className="page_unauth__text">
                         Just one click to start!
@@ -157,4 +156,4 @@ function select(state) {
     };
 }
 
-export default DataWrapper(connect(select)(SignupPage));
+export default PageWrapper(InitDataWrapper(connect(select)(SignupPage)));

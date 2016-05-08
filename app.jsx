@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router'
 import { routerReducer, syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-import InitAuthWrapper from './components/InitAuth.jsx'
+import InitAuthWrapper from './components/containers/InitAuth.jsx'
 import { createNewStore } from './store'
 
 import App from './components/App.jsx'

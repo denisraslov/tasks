@@ -5,12 +5,12 @@ import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import store from './../../store'
-import Snackbar from 'material-ui/lib/snackbar'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
-import DataWrapper from './../../components/DataWrapper.jsx'
+import InitDataWrapper from './../../components/containers/InitData.jsx'
+import PageWrapper from './../../components/containers/Page.jsx'
 import * as actions from './../../actions'
 
 class LoginPage extends React.Component {
@@ -93,25 +93,9 @@ class LoginPage extends React.Component {
         return this.getRefNode(ref).getElementsByTagName('input')[0].value;
     }
 
-    handleErrorCloseRequest() {
-        this.props.dispatch(actions.removeError());
-    }
-
     render() {
-        var contentClasses = 'page_unauth__content ' + (this.state.processing ? 'page_unauth__contentProcessing' : '');
-
         return (
-            <div className={contentClasses}>
-
-                <Snackbar
-                    open={!!this.props.data.error}
-                    message={this.props.data.error || ''}
-                    autoHideDuration={3000}
-                    onRequestClose={this.handleErrorCloseRequest.bind(this)}
-                />
-
-                {this.state.processing ? <LinearProgress mode="indeterminate"/> : ''}
-
+            <div className="page_unauth__content">
                 <div className="page_unauth__panel">
                     <div className="page_unauth__text">
                         Hi there!
@@ -159,4 +143,4 @@ function select(state) {
     };
 }
 
-export default DataWrapper(connect(select)(LoginPage));
+export default PageWrapper(InitDataWrapper(connect(select)(LoginPage)));

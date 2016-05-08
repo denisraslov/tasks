@@ -93,8 +93,6 @@ export function redirect(path) {
         var pathData = pathsData[path.split('/')[1]],
             store = getStore();
 
-        debugger;    
-
         if (pathData && !store[pathData.stateProp]) {
             dispatch(pathData.loadAction(path));
         } else {
