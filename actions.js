@@ -38,12 +38,12 @@ export function addTask(title) {
                 title: title
             })
             .then(function(req) {
-                dispatch(loaded());
                 dispatch(addTaskToState(req.data));
+                dispatch(loaded());
             })
             .catch(function(req) {
-                dispatch(loaded());
                 dispatch(setError(req.data ? req.data.error.message : 'Request error!'));
+                dispatch(loaded());
             });
     };
 }
