@@ -27,7 +27,7 @@ class CalendarCell extends Component {
         return connectDropTarget(
             <td key={this.props.date} className={className}>
                 <div className="calendarCell__date">
-                    {this.props.cell.moment.date() + ((this.props.cell.moment.date() == 1) ? ' ' + this.props.cell.moment.format('MMMM').substr(0, 3) : '')}
+                  {this.props.cell.moment.date() + ((this.props.cell.moment.date() == 1) ? ' ' + this.props.cell.moment.format('MMMM').substr(0, 3) : '')}
                 </div>
 
                 {this.renderTasks(this.props.cell.moment.startOf('day').format('X'))}
