@@ -85,6 +85,11 @@ class LoginPage extends React.Component {
         );
     }
 
+    loginEnter(e) {
+        if(e.keyCode == 13) {
+          this.login();
+        }
+    }
     getRefNode(ref) {
         return ReactDOM.findDOMNode(this.refs[ref]);
     }
@@ -116,6 +121,7 @@ class LoginPage extends React.Component {
                         ref="password"
                         errorText={this.state.errors.password}
                         disabled={this.state.processing}
+                        onKeyDown={this.loginEnter.bind(this)}
                     />
                     <div className="page_unauth__buttons">
                         <FlatButton
