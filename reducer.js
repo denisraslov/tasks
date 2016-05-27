@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const reducer = function (state, action) {
     function getTaskById(id) {
-        return _.find(state.tasks, {id: id});
+        return _.find(state.tasks, {_id: id});
     }
 
     if (action.type) {

@@ -43,10 +43,10 @@ class ListTasks extends Component {
 
         if (items.length) {
             return items.map((task)=> {
-                return <Task key={task.id}
+                return <Task key={task._id}
                              model={task}
                              showPopup={this.props.showPopup}
-                             changeTaskStatus={this.props.changeTaskStatus}
+                             changeTask={this.props.changeTask}
                     />
             });
         } else {

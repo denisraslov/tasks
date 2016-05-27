@@ -48,6 +48,25 @@ export function addTask(title) {
     };
 }
 
+export function editTask(id, params) {
+    return (dispatch) => {
+        dispatch(loading());
+        request
+            .put('/tasks', {
+                id: id,
+                params: params
+            })
+            .then((req) => {
+                dispatch(editTaskToState(id, params));
+                dispatch(loaded());
+            })
+            .catch((req) => {
+                dispatch(setError(req.data ? req.data.error.message: 'Request error!'));
+                dispatch(loaded());
+            })
+    }
+}
+
 export function signup(data) {
     return (dispatch) => {
         dispatch(loading());
@@ -163,11 +182,7 @@ export function addTaskToState(task) {
     return {type: 'ADD_TASK', task};
 }
 
-export function changeTaskStatus(id) {
-    return {type: 'CHANGE_TASK_STATUS', id};
-}
-
-export function editTask(id, params) {
+export function editTaskToState(id, params) {
     return {type: 'EDIT_TASK', id, params};
 }
 
