@@ -51,14 +51,6 @@ class TasksPage extends Component {
         this.props.dispatch(actions.editTask(id, params));
     }
 
-    changeDateTask(id, time) {
-        this.props.dispatch(actions.changeDateTask(id, time));
-    }
-
-    deleteDateTask(id) {
-        this.props.dispatch(actions.deleteDateTask(id));
-    }
-
     logout() {
         this.props.dispatch(actions.logout());
         this.props.dispatch(push('/login'));
@@ -87,7 +79,6 @@ class TasksPage extends Component {
                             items={notDatedTasks.active}
                             showPopup={this.showPopup.bind(this)}
                             changeTask={this.changeTask.bind(this)}
-                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                         <ListTasks
                             id="completedListTasks"
@@ -96,7 +87,6 @@ class TasksPage extends Component {
                             items={notDatedTasks.completed}
                             showPopup={this.showPopup.bind(this)}
                             changeTask={this.changeTask.bind(this)}
-                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                     </div>
                     {this.state.popupModel != null ?

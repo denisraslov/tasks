@@ -4,7 +4,7 @@ import {DragSource} from 'react-dnd';
 
 const taskFromList = {
     beginDrag(props){
-        return {id: props.model.id};
+        return {id: props.model._id};
     }
 }
 

@@ -13,11 +13,10 @@ const reducer = function (state, action) {
             case 'ADD_TASK':
                 state.tasks.push(action.task);
                 break;
-            case 'CHANGE_TASK_STATUS':
-                let task = getTaskById(action.id);
-                task.completed = !task.completed;
-                break;
             case 'EDIT_TASK':
+                if(action.params.date){
+                    action.params.date = moment(action.params.date, 'x');
+                }
                 _.extend(getTaskById(action.id), action.params);
                 break;
             case 'END_AUTH_CHECKING':
@@ -47,9 +46,6 @@ const reducer = function (state, action) {
                 break;
             case 'LOADED':
                 state.loading = false;
-                break;
-            case 'DELETE_DATE_TASK':
-                _.unset(getTaskById(action.id), 'date');
                 break;
         }
 

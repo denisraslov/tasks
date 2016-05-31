@@ -5,7 +5,7 @@ import {DropTarget} from 'react-dnd';
 
 const cellTarget = {
     drop(props, monitor){
-        props.changeTask(monitor.getItem().id, {date: props.cell.moment.startOf('day').format('X')});
+        props.changeTask(monitor.getItem().id, {date: props.cell.moment.startOf('day').format('x')});
     }
 }
 
@@ -48,7 +48,8 @@ class CalendarCell extends Component {
 
     renderTasks(date) {
         return this.props.tasks
-            .filter((task) => (task.date == date))
+            .filter((task) => (task.date !== undefined &&
+                               moment(task.date).startOf('day').format('X') == date))
             .map((task) => {
                 return <TaskCalendar
                     model={task}

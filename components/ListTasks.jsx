@@ -5,11 +5,11 @@ import {DropTarget} from 'react-dnd';
 const listTarget = {
     drop(props, monitor){
         const id = monitor.getItem().id;
-        props.deleteDateTask(id);
+        //props.deleteDateTask(id);
         if (props.id == 'completedListTasks') {
-            props.changeTask(id, {completed: true});
+            props.changeTask(id, {completed: true, date: null});
         } else {
-            props.changeTask(id, {completed: false});
+            props.changeTask(id, {completed: false, date: null});
         }
     }
 }

@@ -3,7 +3,7 @@ import {DragSource} from 'react-dnd';
 
 const taskSource = {
     beginDrag(props){
-        return {id: props.model.id};
+        return {id: props.model._id};
     }
 };
 
@@ -27,7 +27,7 @@ class TaskCalendar extends Component {
         const {connectDragSource, isDragging} = this.props;
 
         return connectDragSource(
-            <div id={'task' + model.id}
+            <div id={'task' + model._id}
                  className="taskCalendar"
                  style={{
                     opacity: isDragging ? 0.5 : 1,

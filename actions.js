@@ -185,7 +185,3 @@ export function addTaskToState(task) {
 export function editTaskToState(id, params) {
     return {type: 'EDIT_TASK', id, params};
 }
-
-export function deleteDateTask(id) {
-    return {type: 'DELETE_DATE_TASK', id};
-}
