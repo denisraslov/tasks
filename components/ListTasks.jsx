@@ -5,11 +5,11 @@ import {DropTarget} from 'react-dnd';
 const listTarget = {
     drop(props, monitor){
         const id = monitor.getItem().id;
-        props.deleteDateTask(id);
+        //props.deleteDateTask(id);
         if (props.id == 'completedListTasks') {
-            props.changeTask(id, {completed: true});
+            props.changeTask(id, {completed: true, date: null});
         } else {
-            props.changeTask(id, {completed: false});
+            props.changeTask(id, {completed: false, date: null});
         }
     }
 }
@@ -43,10 +43,10 @@ class ListTasks extends Component {
 
         if (items.length) {
             return items.map((task)=> {
-                return <Task key={task.id}
+                return <Task key={task._id}
                              model={task}
                              showPopup={this.props.showPopup}
-                             changeTaskStatus={this.props.changeTaskStatus}
+                             changeTask={this.props.changeTask}
                     />
             });
         } else {

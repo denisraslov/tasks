@@ -5,7 +5,7 @@ import {DropTarget} from 'react-dnd';
 
 const cellTarget = {
     drop(props, monitor){
-        props.changeTask(monitor.getItem().id, {date: props.cell.moment.startOf('day').format('X')});
+        props.changeTask(monitor.getItem().id, {date: props.cell.moment.startOf('day').format('x')});
     }
 }
 
@@ -19,12 +19,7 @@ function collect(connect, monitor) {
 class CalendarCell extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cell: this.props.cell,
-            showMonthNames: this.props.showMonthNames
-        }
     }
-
     render() {
         const {connectDropTarget, isOver} = this.props;
         var className = 'calendarCell' + (isOver ? ' calendarCell_over' : '');
@@ -32,18 +27,18 @@ class CalendarCell extends Component {
         return connectDropTarget(
             <td key={this.props.date} className={className}>
                 <div className="calendarCell__date">
-                    {this.state.cell.moment.date() + ((this.state.cell.moment.date() == 1) ? ' ' + this.state.cell.moment.format('MMMM').substr(0, 3) : '')}
+                  {this.props.cell.moment.date() + ((this.props.cell.moment.date() == 1) ? ' ' + this.props.cell.moment.format('MMMM').substr(0, 3) : '')}
                 </div>
 
-                {this.renderTasks(this.state.cell.moment.startOf('day').format('X'))}
+                {this.renderTasks(this.props.cell.moment.startOf('day').format('X'))}
 
                 {
-                    (this.state.cell.newMonth) &&
+                    (this.props.cell.newMonth) &&
                     <div className='calendarCell__monthName'
-                         style={{opacity: this.state.showMonthNames ? 1 : 0}}>
+                         style={{opacity: this.props.showMonthNames ? 1 : 0}}>
                         {moment({
-                            M: this.state.cell.newMonth.month,
-                            y: this.state.cell.newMonth.year
+                            M: this.props.cell.newMonth.month,
+                            y: this.props.cell.newMonth.year
                         }).format('MMMM YYYY')}
                     </div>
                 }
@@ -53,7 +48,8 @@ class CalendarCell extends Component {
 
     renderTasks(date) {
         return this.props.tasks
-            .filter((task) => (task.date == date))
+            .filter((task) => (task.date !== undefined &&
+                               moment(task.date).startOf('day').format('X') == date))
             .map((task) => {
                 return <TaskCalendar
                     model={task}

@@ -4,7 +4,7 @@ import {DragSource} from 'react-dnd';
 
 const taskFromList = {
     beginDrag(props){
-        return {id: props.model.id};
+        return {id: props.model._id};
     }
 }
 
@@ -23,8 +23,13 @@ class Task extends Component {
         };
     }
 
-    changeTaskStatus(e) {
-        this.props.changeTaskStatus(this.state.model.id);
+    changeTask(e) {
+        const model = this.state.model;
+
+        model.completed = !model.completed;
+        this.props.changeTask(model._id, {completed: model.completed});
+
+        this.setState({model : model});
     }
 
     render() {
@@ -32,7 +37,7 @@ class Task extends Component {
         const {connectDragSource, isDragging, mo} = this.props;
 
         return connectDragSource(
-            <div id={'task' + model.id}
+            <div id={'task' + model._id}
                  className="task"
                  onClick={this.showPopup.bind(this)}
                  style={{
@@ -42,7 +47,7 @@ class Task extends Component {
                 <Checkbox
                     className="task__checkbox"
                     checked={model.completed}
-                    onCheck={this.changeTaskStatus.bind(this)}
+                    onCheck={this.changeTask.bind(this)}
                     onClick={(e)=> {e.stopPropagation()}}
                     />
                 {model.title}

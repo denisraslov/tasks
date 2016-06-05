@@ -22,8 +22,13 @@ export default class extends React.Component {
         this.setState({model: newProps.model});
     }
 
-    changeTaskStatus() {
-        this.props.changeTaskStatus(this.state.model.id);
+    changeTask() {
+       const model = this.state.model
+
+       model.completed = !model.completed
+       this.props.changeTask(model._id, {completed: model.completed})
+
+       this.setState({model: model})
     }
 
     editTitle(e) {
@@ -41,17 +46,19 @@ export default class extends React.Component {
     saveTitle(e) {
         var value = e.target.value;
 
-        this.props.changeTask(this.state.model.id, { name: value });
+        this.props.changeTask(this.state.model._id, { title: value });
         //TODO: add Promise
         this.setState({openEditTitle: false});
     }
 
     saveDescription() {
-        var value = ReactDOM.findDOMNode(this.refs.descriptionInput).getElementsByTagName('textarea')[1].value;
+        const value = ReactDOM.findDOMNode(this.refs.descriptionInput).getElementsByTagName('textarea')[1].value,
+              model = this.state.model
 
-        this.props.changeTask(this.state.model.id, { description: value });
+        this.props.changeTask(model._id, { description: value });
+        model.description = value;
         //TODO: add Promise
-        this.setState({openEditDescription: false});
+        this.setState({openEditDescription: false, model: model});
     }
 
     render() {
@@ -77,14 +84,14 @@ export default class extends React.Component {
                             ref="titleInput"
                             className='taskPopup__titleInput'
                             onEnterKeyDown={this.saveTitle.bind(this)}
-                            defaultValue={this.state.model.name}
+                            defaultValue={this.state.model.title}
                             onBlur={this.saveTitle.bind(this)}
 
                         /> :
                         <div
                             className='taskPopup__title'
                             onClick={this.editTitle.bind(this)}>
-                            {this.state.model.name}
+                            {this.state.model.title}
                         </div>
                 }
 
@@ -93,7 +100,7 @@ export default class extends React.Component {
                 <Checkbox
                     label="Complete"
                     checked={this.state.model.completed}
-                    onCheck={this.changeTaskStatus.bind(this)}
+                    onCheck={this.changeTask.bind(this)}
                     className='taskPopup__checkbox'
                 />
             </Dialog>
@@ -131,7 +138,9 @@ export default class extends React.Component {
             return <div
                 className='taskPopup__description'
                 onClick={this.editDescription.bind(this)}>
-                {this.state.model.description}
+                {this.state.model.description
+                  ? this.state.model.description
+                  : 'Default description'}
             </div>;
         }
     }

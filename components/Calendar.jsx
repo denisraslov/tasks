@@ -5,16 +5,40 @@ import CalendarCell from './../components/CalendarCell.jsx';
 export default class extends Component {
     constructor(props) {
         super(props);
+
+        const beginMonth = moment().subtract(1, 'months');
+
         this.state = {
-            month: 10,
-            year: 2015,
-            monthesCount: 5,
+            month: beginMonth.month(),
+            year: beginMonth.year(),
+            monthesCount: 4,
             showMonthNames: false
         }
     }
 
+    componentDidMount(){
+      const calendar = document.getElementById('calendar');
+      calendar.scrollTop = 400;
+    }
+
     onScroll(e) {
-        this.setState({showMonthNames: true});
+        if(calendar.scrollHeight == calendar.scrollTop + calendar.clientHeight) {
+            let beginMonth = moment({M:this.state.month, y: this.state.year}).add(1, 'months');
+            this.setState({showMonthNames: true, month: beginMonth.month(), year: beginMonth.year()}, () => {
+                const calendar = document.getElementById('calendar');
+                calendar.scrollTop -= 400;
+            });
+        }
+        else if(calendar.scrollTop == 0) {
+            let beginMonth = moment({M: this.state.month, y: this.state.year}).subtract(1, 'months');
+            this.setState({showMonthNames: true, month: beginMonth.month(), year: beginMonth.year()}, () => {
+                const calendar = document.getElementById('calendar')
+                calendar.scrollTop += 400;
+            });
+        }
+        else {
+          this.setState({showMonthNames: true});
+        }
 
         clearTimeout(this.showMonthNamesTimeout);
         this.showMonthNamesTimeout = setTimeout(() => {
@@ -66,7 +90,7 @@ export default class extends Component {
         const rows = this.getInitialMonthes();
 
         return (
-            <div className='calendar'>
+            <div  className='calendar'>
                 <table className='calendar__head'>
                     <tbody>
                     <tr>
@@ -78,7 +102,7 @@ export default class extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <div className='calendar__body' onScroll={this.onScroll.bind(this)}>
+                <div id = 'calendar' className='calendar__body' onScroll={this.onScroll.bind(this)} scrolling="yes">
                     <table>
                         <tbody>
                         {

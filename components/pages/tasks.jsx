@@ -47,20 +47,8 @@ class TasksPage extends Component {
         this.props.dispatch(actions.addTask(name));
     }
 
-    changeTaskStatus(id) {
-        this.props.dispatch(actions.changeTaskStatus(id));
-    }
-
     changeTask(id, params) {
         this.props.dispatch(actions.editTask(id, params));
-    }
-
-    changeDateTask(id, time) {
-        this.props.dispatch(actions.changeDateTask(id, time));
-    }
-
-    deleteDateTask(id) {
-        this.props.dispatch(actions.deleteDateTask(id));
     }
 
     logout() {
@@ -70,7 +58,6 @@ class TasksPage extends Component {
 
     render() {
         const notDatedTasks = getNotDatedTasks(this.props.data.tasks);
-
         return (
             <div>
                 <Panel onLogout={this.logout.bind(this)} />
@@ -91,9 +78,7 @@ class TasksPage extends Component {
                             placeholder="Nothing to do! Have a nice day!"
                             items={notDatedTasks.active}
                             showPopup={this.showPopup.bind(this)}
-                            changeTaskStatus={this.changeTaskStatus.bind(this)}
                             changeTask={this.changeTask.bind(this)}
-                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                         <ListTasks
                             id="completedListTasks"
@@ -101,9 +86,7 @@ class TasksPage extends Component {
                             placeholder="Nothing was done yet..."
                             items={notDatedTasks.completed}
                             showPopup={this.showPopup.bind(this)}
-                            changeTaskStatus={this.changeTaskStatus.bind(this)}
                             changeTask={this.changeTask.bind(this)}
-                            deleteDateTask={this.deleteDateTask.bind(this)}
                             />
                     </div>
                     {this.state.popupModel != null ?
@@ -111,7 +94,6 @@ class TasksPage extends Component {
                             model={this.state.popupModel}
                             open={!!this.state.popupModel}
                             onRequestClose={this.onPopupClose.bind(this)}
-                            changeTaskStatus={this.changeTaskStatus.bind(this)}
                             changeTask={this.changeTask.bind(this)}
                             /> : ''
                     }
