@@ -1,14 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import Checkbox from 'material-ui/lib/checkbox';
-import TextField from 'material-ui/lib/text-field.js';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
-import IconDone from 'material-ui/lib/svg-icons/action/done';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Dialog from 'material-ui/lib/dialog'
+import FlatButton from 'material-ui/lib/flat-button'
+import RaisedButton from 'material-ui/lib/raised-button'
+import Checkbox from 'material-ui/lib/checkbox'
+import TextField from 'material-ui/lib/text-field.js'
+import FloatingActionButton from 'material-ui/lib/floating-action-button'
+import IconDone from 'material-ui/lib/svg-icons/action/done'
 
-export default class extends React.Component {
+import CSSModules from 'react-css-modules'
+import styles from './PopupTask.css'
+
+class PopupTask extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,15 +85,16 @@ export default class extends React.Component {
                         <TextField
                             id='title'
                             ref="titleInput"
-                            className='taskPopup__titleInput'
+                            styleName='titleInput'
                             onEnterKeyDown={this.saveTitle.bind(this)}
                             defaultValue={this.state.model.title}
                             onBlur={this.saveTitle.bind(this)}
-
+                            style={this.getTitleStyles()}
                         /> :
                         <div
-                            className='taskPopup__title'
-                            onClick={this.editTitle.bind(this)}>
+                            styleName='title'
+                            onClick={this.editTitle.bind(this)}
+                            style={this.getTitleStyles()}>
                             {this.state.model.title}
                         </div>
                 }
@@ -101,10 +105,43 @@ export default class extends React.Component {
                     label="Complete"
                     checked={this.state.model.completed}
                     onCheck={this.changeTask.bind(this)}
-                    className='taskPopup__checkbox'
+                    styleName="checkbox"
+                    style={{
+                        display: 'inline-block',
+                        position: 'absolute',
+                        top: '20px',
+                        right: '20px',
+                        width: 'auto'
+                    }}
                 />
             </Dialog>
         );
+    }
+
+    getTitleStyles() {
+        return {
+            lineHeight: '24px',
+            height: '48px',
+            width: 'calc(100% - 170px)',
+            fontSize: '20px'
+        }
+    }
+
+    getSecriptionStyles(forInput) {
+        var styles = {
+            width: '100%',
+            fontSize: '15px',
+            lineHeight: '24px'
+        }
+
+        if (forInput) {
+            styles.marginTop = '-2px';
+            styles.minHeight = '46px';
+        } else {
+            styles.minHeight = '48px';
+        }
+
+        return styles;
     }
 
     renderDescription() {
@@ -121,23 +158,25 @@ export default class extends React.Component {
                     mini = {true}
                     secondary = {true}
                     onClick={this.saveDescription.bind(this)}
-                    className="popupTask__descriptionSaveButton"
+                    styleName="descriptionSaveButton"
                     >
                     <IconDone />
                 </FloatingActionButton>
                 <TextField
                     id='description'
                     ref="descriptionInput"
-                    className='taskPopup__descriptionInput'
+                    styleName='descriptionInput'
                     multiLine={true}
                     defaultValue={this.state.model.description}
+                    styles={this.getSecriptionStyles(true)}
                 />
             </div>;
 
         } else {
             return <div
-                className='taskPopup__description'
-                onClick={this.editDescription.bind(this)}>
+                styleName='description'
+                onClick={this.editDescription.bind(this)}
+                styles={this.getSecriptionStyles(false)}>
                 {this.state.model.description
                   ? this.state.model.description
                   : 'Default description'}
@@ -145,3 +184,5 @@ export default class extends React.Component {
         }
     }
 }
+
+export default CSSModules(PopupTask, styles)

@@ -5,13 +5,13 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router'
 import { routerReducer, syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-import InitAuthWrapper from './components/containers/InitAuth.jsx'
+import InitAuthWrapper from './components/_containers/InitAuth.jsx'
 import { createNewStore } from './store'
 
 import App from './components/App.jsx'
-import PageSignup from './components/pages/signup.jsx'
-import PageLogin from './components/pages/login.jsx'
-import PageTasks from './components/pages/tasks.jsx'
+import PageSignup from './components/_pages/Signup/Signup.jsx'
+import PageLogin from './components/_pages/Login/Login.jsx'
+import PageTasks from './components/_pages/Tasks/Tasks.jsx'
 
 const store = createNewStore(browserHistory)
 const history = syncHistoryWithStore(browserHistory, store)

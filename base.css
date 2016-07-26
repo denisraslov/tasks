@@ -1,0 +1,19 @@
+@import "mixins";
+
+html {
+    @mixin scrollbars .5em slategray #eee;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+#content {
+  position: relative;
+  max-height: 100%;
+}

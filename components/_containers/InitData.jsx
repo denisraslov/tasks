@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import IconDone from 'material-ui/lib/svg-icons/action/done'
-import CircularProgress from 'material-ui/lib/circular-progress'
 import pathsData from './../../data'
 import * as actions from './../../actions'
+import Loader from './../Loader/Loader.jsx'
 
 export default function Wrap(DecoratedPage) {
 
@@ -52,10 +51,7 @@ export default function Wrap(DecoratedPage) {
         }
 
         renderLoading() {
-            return <div className="loader">
-                <IconDone className="loader__icon" />
-                <CircularProgress className="loader__spinner" size={1.5} />
-            </div>;
+            return <Loader />;
         }
     }
 

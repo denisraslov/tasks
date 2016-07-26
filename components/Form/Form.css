@@ -1,0 +1,19 @@
+.form {
+  width: 280px;
+  margin: 0 auto;
+  padding-top: 290px;
+}
+
+.text {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.buttons {
+  margin-top: 28px;
+  text-align: right;
+
+  & > div {
+    margin-left: 8px;
+  }
+}

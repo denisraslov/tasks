@@ -1,6 +1,9 @@
-import React, {Component} from 'react';
-import Checkbox from 'material-ui/lib/checkbox';
-import {DragSource} from 'react-dnd';
+import React, {Component} from 'react'
+import Checkbox from 'material-ui/lib/checkbox'
+import {DragSource} from 'react-dnd'
+
+import CSSModules from 'react-css-modules'
+import styles from './Task.css'
 
 const taskFromList = {
     beginDrag(props){
@@ -38,19 +41,23 @@ class Task extends Component {
 
         return connectDragSource(
             <div id={'task' + model._id}
-                 className="task"
+                 styleName="task"
                  onClick={this.showPopup.bind(this)}
                  style={{
                     opacity: isDragging ? 0.5 : 1,
                     cursor: 'move'
                  }}>
                 <Checkbox
-                    className="task__checkbox"
                     checked={model.completed}
                     onCheck={this.changeTask.bind(this)}
                     onClick={(e)=> {e.stopPropagation()}}
-                    />
-                {model.title}
+                    style={{
+                        verticalAlign: 'middle',
+                        display: 'inline-block',
+                        width: '36px'
+                    }}
+                />
+                <div styleName="title">{model.title}</div>
             </div>
         );
     }
@@ -60,4 +67,4 @@ class Task extends Component {
     }
 }
 
-export default DragSource('task', taskFromList, collect)(Task);
+export default DragSource('task', taskFromList, collect)(CSSModules(Task, styles));

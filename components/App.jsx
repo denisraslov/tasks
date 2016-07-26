@@ -1,7 +1,7 @@
-import React from 'react';
-import moment from 'moment';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import './../styles.scss';
+import React from 'react'
+import moment from 'moment'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import './../styles.css'
 
 injectTapEventPlugin();
 

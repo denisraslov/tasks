@@ -1,5 +1,8 @@
-import React, {Component} from 'react';
-import {DragSource} from 'react-dnd';
+import React, {Component} from 'react'
+import {DragSource} from 'react-dnd'
+
+import CSSModules from 'react-css-modules'
+import styles from './TaskCalendar.css'
 
 const taskSource = {
     beginDrag(props){
@@ -28,7 +31,7 @@ class TaskCalendar extends Component {
 
         return connectDragSource(
             <div id={'task' + model._id}
-                 className="taskCalendar"
+                 styleName="taskCalendar"
                  style={{
                     opacity: isDragging ? 0.5 : 1,
                     cursor: 'move'
@@ -44,4 +47,6 @@ class TaskCalendar extends Component {
     }
 }
 
-export default DragSource('task', taskSource, collect)(TaskCalendar);
+export default DragSource('task', taskSource, collect)(
+    CSSModules(TaskCalendar, styles)
+);

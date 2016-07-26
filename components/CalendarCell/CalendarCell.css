@@ -1,0 +1,28 @@
+
+.calendarCell {
+   composes: cell from "./../Calendar/Calendar.css";
+   height: 100px;
+   position: relative;
+}
+
+.calendarCellDndOver {
+   composes: calendarCell;
+   background-color: #FFF9C4;
+}
+
+.date {
+  font-size: 13px;
+  padding-bottom: 6px;
+}
+
+.monthName {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 12px 10px #E9E8E6;
+  transition: 0.3s opacity;
+}

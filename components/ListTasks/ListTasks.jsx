@@ -1,6 +1,9 @@
-import React, {Component} from 'react';
-import Task from './Task.jsx';
-import {DropTarget} from 'react-dnd';
+import React, {Component} from 'react'
+import Task from './../Task/Task.jsx'
+import {DropTarget} from 'react-dnd'
+
+import CSSModules from 'react-css-modules'
+import styles from './ListTasks.css'
 
 const listTarget = {
     drop(props, monitor){
@@ -28,12 +31,12 @@ class ListTasks extends Component {
 
     render() {
         const {items, connectDropTarget, isOver} = this.props;
-        var className = 'listTasks' + (isOver ? ' listTasks_over' : '');
+        var styleName = (isOver ? 'listTasksDndOver' : 'listTasks');
 
         return connectDropTarget(
-            <div className={className}>
-                <div className="listTasks__title">{this.props.title}</div>
-                <div className="listTasks__body">{this.renderItems()}</div>
+            <div styleName={styleName}>
+                <div styleName="title">{this.props.title}</div>
+                <div styleName="body">{this.renderItems()}</div>
             </div>
         );
     }
@@ -50,9 +53,9 @@ class ListTasks extends Component {
                     />
             });
         } else {
-            return <div className="listTasks__placeholder">{this.props.placeholder}</div>
+            return <div styleName="placeholder">{this.props.placeholder}</div>
         }
     }
 }
 
-export default DropTarget('task', listTarget, collect)(ListTasks);
+export default DropTarget('task', listTarget, collect)(CSSModules(ListTasks, styles));

@@ -1,0 +1,8 @@
+.menu {
+  display: inline-block;
+  position: relative;
+  padding: 0 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  float: right;
+}

@@ -1,0 +1,17 @@
+.task {
+  padding: 10px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  vertical-align: middle;
+
+  &:hover {
+    background: #ddd;
+  }
+}
+
+.title {
+    vertical-align: middle;
+    display: inline-block;
+}

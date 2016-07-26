@@ -1,0 +1,11 @@
+.content {
+  position: absolute;
+  height: calc(100% - 49px);
+  width: 100%;
+}
+
+.listWrap {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+}

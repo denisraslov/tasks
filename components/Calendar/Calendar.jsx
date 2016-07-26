@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import CalendarCell from './../components/CalendarCell.jsx';
+import CalendarCell from './../../components/CalendarCell/CalendarCell.jsx';
 
-export default class extends Component {
+import CSSModules from 'react-css-modules'
+import styles from './Calendar.css'
+
+class Calendar extends Component {
     constructor(props) {
         super(props);
 
@@ -90,24 +93,24 @@ export default class extends Component {
         const rows = this.getInitialMonthes();
 
         return (
-            <div  className='calendar'>
-                <table className='calendar__head'>
+            <div styleName="calendar">
+                <table styleName="headTable">
                     <tbody>
-                    <tr>
+                    <tr styleName="row">
                         {
                             rows[0].map((cell) => {
-                                return <td key={cell.moment.format('D M YYYY')}>{cell.moment.format('dddd')}</td>;
+                                return <td styleName="headCell" key={cell.moment.format('D M YYYY')}>{cell.moment.format('dddd')}</td>;
                             })
                         }
                     </tr>
                     </tbody>
                 </table>
-                <div id = 'calendar' className='calendar__body' onScroll={this.onScroll.bind(this)} scrolling="yes">
-                    <table>
+                <div id="calendar" styleName="body" onScroll={this.onScroll.bind(this)} scrolling="yes">
+                    <table styleName="bodyTable">
                         <tbody>
                         {
                             rows.map((row, i) => {
-                                return <tr key={'line'+i}>
+                                return <tr key={'line' + i} styleName="row">
                                     {
                                         row.map((cell) => {
                                             return (
@@ -131,3 +134,5 @@ export default class extends Component {
     }
 
 }
+
+export default CSSModules(Calendar, styles)

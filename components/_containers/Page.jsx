@@ -17,7 +17,20 @@ export default function Wrap(DecoratedPage) {
 
         render() {
             return <div>
-                {this.props.loading ? <LinearProgress mode="indeterminate"/> : ''}
+
+                {
+                    this.props.loading
+                        ? <LinearProgress
+                                mode="indeterminate"
+                                style={{
+                                    position: 'fixed',
+                                    top: 0,
+                                    left: 0
+                                }}
+                            />
+                        : ''
+                }
+
                 <Snackbar
                     open={!!this.props.error}
                     message={this.props.error || ''}

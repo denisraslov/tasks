@@ -1,7 +1,10 @@
-import React from 'react';
-import TextField from 'material-ui/lib/text-field';
+import React from 'react'
+import TextField from 'material-ui/lib/text-field'
 
-export default class extends React.Component {
+import CSSModules from 'react-css-modules'
+import styles from './AdderTask.css'
+
+class AdderTask extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,16 +26,20 @@ export default class extends React.Component {
 
     render() {
         return (
-            <div className="taskAdder">
+            <div styleName="adderTask">
                 <TextField
-                    className="taskAdder__input"
+                    style={{
+                        width: '100%'
+                    }}
                     hintText="Type the task"
                     floatingLabelText="New task"
                     value={this.state.value}
                     onChange={this.onChange.bind(this)}
                     onKeyUp={this.onKeyUp.bind(this)}
-                    />
+                />
             </div>
         )
     }
 }
+
+export default CSSModules(AdderTask, styles)

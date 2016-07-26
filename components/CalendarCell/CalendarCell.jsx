@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import TaskCalendar from './../components/TaskCalendar.jsx';
+import TaskCalendar from './../../components/TaskCalendar/TaskCalendar.jsx';
 import {DropTarget} from 'react-dnd';
+
+import CSSModules from 'react-css-modules'
+import styles from './CalendarCell.css'
 
 const cellTarget = {
     drop(props, monitor){
@@ -22,11 +25,11 @@ class CalendarCell extends Component {
     }
     render() {
         const {connectDropTarget, isOver} = this.props;
-        var className = 'calendarCell' + (isOver ? ' calendarCell_over' : '');
+        var styleName = (isOver ? 'calendarCellDndOver' : 'calendarCell');
 
         return connectDropTarget(
-            <td key={this.props.date} className={className}>
-                <div className="calendarCell__date">
+            <td key={this.props.date} styleName="calendarCell">
+                <div styleName="date">
                   {this.props.cell.moment.date() + ((this.props.cell.moment.date() == 1) ? ' ' + this.props.cell.moment.format('MMMM').substr(0, 3) : '')}
                 </div>
 
@@ -34,7 +37,7 @@ class CalendarCell extends Component {
 
                 {
                     (this.props.cell.newMonth) &&
-                    <div className='calendarCell__monthName'
+                    <div styleName="monthName"
                          style={{opacity: this.props.showMonthNames ? 1 : 0}}>
                         {moment({
                             M: this.props.cell.newMonth.month,
@@ -59,4 +62,6 @@ class CalendarCell extends Component {
     }
 }
 
-export default DropTarget('task', cellTarget, collect)(CalendarCell);
+export default DropTarget('task', cellTarget, collect)(
+    CSSModules(CalendarCell, styles)
+);

@@ -1,0 +1,34 @@
+.popupTask {
+
+}
+
+.title,
+.titleInput {
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.title,
+.description {
+  cursor: pointer;
+}
+
+.description,
+.descriptionInput {
+  margin: 40px 10px 10px;
+  display: block;
+  margin-top: 10px;
+}
+
+.checkbox {
+  background-color: #ddd;
+  padding: 11px;
+  border-radius: 4px;
+}
+
+.descriptionSaveButton {
+  top: 0;
+  right: 0;
+}

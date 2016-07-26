@@ -1,0 +1,49 @@
+
+.calendar {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: 70%;
+  min-width: 800px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.headTable {
+    composes: table;
+    color: #B0BEC5;
+    font-size: 13px;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.row {
+  width: 100%;
+}
+
+.cell {
+  vertical-align: top;
+  width: calc(100% / 7);
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.headCell {
+    composes: cell;
+    border: none;
+}
+
+.body {
+  height: calc(100% - 36px);
+  overflow-y: scroll;
+}
+
+.bodyTable {
+    composes: table;
+}
